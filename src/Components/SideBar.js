@@ -1,14 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     const SideBarValue=useSelector(store=>store.config.changeSideBar)
  if(!SideBarValue) return null;
  
     return  (
-    <div className='col-span-2 text-center p-2 overflow-y-scroll h-full m-2 shadow-lg'>
+    <div className='w-2/12 text-center p-2  m-2 shadow-lg min-w-56'>
+        <div className=''>
         <ul className='p-2  '>
-            <li className='hover:bg-gray-100 py-2 rounded-lg'>Home</li>
+            <Link to="/"><li className='hover:bg-gray-100 py-2 rounded-lg'>Home</li> </Link>
             <li className='hover:bg-gray-100 py-2 rounded-lg'>Shorts</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg'>Subcription</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg'>YouTube Music</li>
@@ -42,6 +44,7 @@ const SideBar = () => {
             <li className='hover:bg-gray-100 py-2 rounded-lg text-center'>Help</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg text-center'>send feedback</li>
         </ul>
+        </div>
     </div>
   )
 }

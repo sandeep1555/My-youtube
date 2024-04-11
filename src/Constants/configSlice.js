@@ -10,8 +10,12 @@ const configSlice=createSlice({
         getSideBar:(state)=>
         {
             state.changeSideBar= !state.changeSideBar;
+        },
+        closeSideBar:(state)=>
+        {
+            state.changeSideBar= false;
         }
     }
 })
-export const {getSideBar}=configSlice.actions
+export const {getSideBar,closeSideBar}=configSlice.actions
 export  default configSlice.reducer

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { YOUTUBE_API } from '../Constants/useConstant';
 import VedioCard from './VedioCard';
+import { Link } from 'react-router-dom';
 
 const CardContainer = () => {
 
@@ -20,10 +21,10 @@ const CardContainer = () => {
 
     
   return (
-    <div className='flex flex-wrap m-2 overflow-y-scroll h-screen '>
+    <div className='w-10/12  m-2 flex flex-wrap '>
         {popularVedio.map((vedio)=>
         (
-            <VedioCard key={vedio.id} info={vedio}/>
+           <Link to={"/watch?v="+vedio.id}><VedioCard key={vedio.id} info={vedio}/></Link> 
         ))}
         
     </div>

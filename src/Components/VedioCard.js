@@ -1,7 +1,6 @@
 import React from 'react'
 
 const VedioCard = ({info}) => {
-    console.log(info);
     const {snippet,statistics}=info;
 
     const {channelTitle,title,thumbnails}=snippet;
@@ -11,14 +10,14 @@ const VedioCard = ({info}) => {
 
   return (
 
-    <div className='w-72 m-2  p-2 cursor-pointer  rounded-lg' >
+    <div className='m-2  p-2 cursor-pointer  rounded-lg  w-[300px]' >
         <div>
-        <img  className="rounded-lg" src={thumbnails.medium.url} />
+        <img  alt='img' className="rounded-lg" src={thumbnails.medium.url} />
         </div>
 
-        <div className=''>
-            <p className='font-bold'>{title}</p>
-            <p>{channelTitle}</p>
+        <div className='w-72'>
+            <p className='font-bold w-72 '>{title}</p>
+            <p cl>{channelTitle}</p>
             <p>{viewCount} views</p>
         </div>
 

@@ -22,7 +22,7 @@ const CardContainer = () => {
     
   return (
     <div className='w-10/12  m-2 flex flex-wrap '>
-        {popularVedio.map((vedio)=>
+        { popularVedio && popularVedio.map((vedio)=>
         (
            <Link to={"/watch?v="+vedio.id}><VedioCard key={vedio.id} info={vedio}/></Link> 
         ))}

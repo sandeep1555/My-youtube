@@ -1,29 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import VedioCard from './VedioCard';
+import { YOUTUBE_API_KEY } from '../Constants/useConstant';
 
 const SideList = ({info}) => {
-    const {snippet,statistics}=info;
 
-    const {channelTitle,title,thumbnails}=snippet;
+const {snippet}=info;
 
-    const {viewCount}=statistics;
-
+  
 
   return (
 
-    <div className='m-1  p-2 cursor-pointer flex flex-row ' >
+    <div className='flex ' >
         <div className='w-[220px] '>
-        <img  alt="img" className="rounded-xl p-2" src={thumbnails.medium.url} />
+        <img  alt="img" className="rounded-xl p-2" src={snippet.thumbnails.medium.url} />
         </div>
 
         <div className='w-56  ' >
-            <p className='font-bold text-sm  '>{title}</p>
-            <p cl>{channelTitle}</p>
-            <p>{viewCount} views</p>
+            <p className='font-bold text-sm  '>{snippet.title}</p>
+            <p cl>{snippet.channelTitle}</p>
+            <p>views</p>
         </div>
 
-    </div>
+     </div>
   )
-}
+ }
 
 export default SideList

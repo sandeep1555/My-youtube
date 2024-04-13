@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getSideBar } from '../Constants/configSlice'
+import { YOUTUBE_SEARCH_SUGGEST } from '../Constants/useConstant';
 
 const Header = () => {
-
+const [SearchText,setSearchText]=useState("");
+const [SuggestionList,setSuggestionList]=useState([]);
+const [SuggestionOpen,setSuggestionOpen]=useState(false);
+const [SuggestionClose,setSuggestionClose]=useState(true);
 
     const dispatch=useDispatch();
     const handleSideMenuBar=()=>
     {
         dispatch(getSideBar());
     }
+
+const GetYoutubeSuggestion=async()=>
+{
+  const data=await fetch(YOUTUBE_SEARCH_SUGGEST+SearchText);
+  const json=await data.json();
+setSuggestionList(json[1]);
+}
+useEffect(()=>
+{
+  const timer=setTimeout(()=>GetYoutubeSuggestion(),200);
+
+  return ()=>
+  {
+    clearTimeout(timer);
+  }
+},[SearchText])
+console.log(SuggestionList)
+
+
   return (
     <div className="grid grid-flow-col m-2 p-2 sticky">
 
@@ -20,11 +43,21 @@ const Header = () => {
 
 
 <div className='col-span-10 ml-40 flex'>
-    <input  className="w-1/2  rounded-l-full p-2 border border-gray-400" type="text" placeholder='Search ' />
+
+    <input  className="w-1/2  rounded-l-full p-2 border border-gray-400 px-5" type="text" placeholder='Search ' value={SearchText} onChange={(e)=>setSearchText(e.target.value)}  onFocus={()=>setSuggestionOpen(true)} onBlur={()=>setSuggestionOpen(false)} />
     <button  className='rounded-r-full border border-gray-400 p-2 px-6 bg-gray-100'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    
   <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
 </svg>
 </button>
+{(SuggestionOpen && SearchText.length>1) && <div className='fixed bg-white my-[43px] w-[27rem] border-gray-100 border p-2 rounded-lg shadow-lg'>
+      <ul>
+      {SuggestionList.map(List=> <li className='px-3 py-2 hover:bg-gray-100' key={List}>{List}</li>)}
+       
+      
+
+      </ul>
+      </div>}
 </div>
 
 <div className='col-span-1'>

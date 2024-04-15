@@ -1,11 +1,11 @@
 import React from 'react'
 
 const VedioCard = ({info}) => {
-    const {snippet,statistics}=info;
+    const {snippet}=info;
 
     const {channelTitle,title,thumbnails}=snippet;
 
-    const {viewCount}=statistics
+   // const {viewCount}=statistics
 
 
   return (
@@ -18,7 +18,7 @@ const VedioCard = ({info}) => {
         <div className='w-72'>
             <p className='font-bold w-72 '>{title}</p>
             <p cl>{channelTitle}</p>
-            <p>{viewCount} views</p>
+            {/* <p>{viewCount} views</p> */}
         </div>
 
     </div>

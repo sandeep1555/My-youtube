@@ -4,6 +4,9 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { closeSideBar } from '../Constants/configSlice';
 import SideList from './SideList';
 import { YOUTUBE_API, YOUTUBE_API_BYID, YOUTUBE_API_KEY } from '../Constants/useConstant';
+import CommentContainer from './CommentContainer';
+import LiveChat from './LiveChat';
+import LiveChatContainer from './LiveChatContainer';
 
 const WatchPage = () => {
 const [watchPageVedio,setwatchPageVedio]=useState([]);
@@ -58,11 +61,11 @@ if(watchPageVedio && SideListVedio)
     <div className='col-span-11 m-2 p-2 '>
 
 <iframe  className="rounded-lg" width="950" height="500" src={"https://www.youtube.com/embed/"+vedioId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<h1 className='p-2  font-bold text-2xl'>{watchPageVedio.snippet?.title}</h1>
+<h1 className='p-2  font-bold text-2xl max-w-[950px]'>{watchPageVedio.snippet?.title}</h1>
 <div className='flex items-center'>
     <img className="rounded-full bg-gray-400 w-12 h-12"  src=""/>
     <div>
-<h2 className='mx-2 text-l font-bold'>{watchPageVedio.snippet?.channelTitle}</h2>
+<h2 className='mx-2 text-l font-bold '>{watchPageVedio.snippet?.channelTitle}</h2>
 <p className='mx-2'>{watchPageVedio.statistics?.viewCount}views</p>
 </div>
 <button className='px-4 text-white bg-black mx-3 py-2 rounded-full '>Subcribe</button>
@@ -77,12 +80,16 @@ if(watchPageVedio && SideListVedio)
 </button>
 </div>
 
-
+<CommentContainer/>
     </div>
     <div className='flex flex-col'>
- {SideListVedio.map((vedio=>(
+ {/* {SideListVedio.map((vedio=>(
   <SideList  key={vedio.id} info={vedio}/>
- )))}
+ )))} */}
+
+ <LiveChatContainer/>
+
+
 
    </div>
     </div>

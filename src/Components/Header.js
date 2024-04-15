@@ -1,36 +1,54 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getSideBar } from '../Constants/configSlice'
 import { YOUTUBE_SEARCH_SUGGEST } from '../Constants/useConstant';
+import { getSearchCache } from '../Constants/suggestionSlice';
 
 const Header = () => {
 const [SearchText,setSearchText]=useState("");
 const [SuggestionList,setSuggestionList]=useState([]);
 const [SuggestionOpen,setSuggestionOpen]=useState(false);
-const [SuggestionClose,setSuggestionClose]=useState(true);
 
     const dispatch=useDispatch();
     const handleSideMenuBar=()=>
     {
         dispatch(getSideBar());
     }
+    const SearchCache=useSelector((store)=>store.searchcache);
 
 const GetYoutubeSuggestion=async()=>
 {
   const data=await fetch(YOUTUBE_SEARCH_SUGGEST+SearchText);
   const json=await data.json();
 setSuggestionList(json[1]);
+
+dispatch(getSearchCache({
+  [SearchText]:json[1],
+}))
+
+
 }
 useEffect(()=>
 {
-  const timer=setTimeout(()=>GetYoutubeSuggestion(),200);
+  const timer=setTimeout(()=>
+  {
+    if(SearchCache[SearchText])
+    {
+      setSuggestionList(SearchCache[SearchText]);
+    }
+  else
+  {
+    GetYoutubeSuggestion();
+  }
+     
+  },200);
 
   return ()=>
   {
     clearTimeout(timer);
   }
 },[SearchText])
-console.log(SuggestionList)
+
 
 
   return (
@@ -50,7 +68,7 @@ console.log(SuggestionList)
   <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
 </svg>
 </button>
-{(SuggestionOpen && SearchText.length>1) && <div className='fixed bg-white my-[43px] w-[27rem] border-gray-100 border p-2 rounded-lg shadow-lg'>
+{(SuggestionOpen && SearchText.length>0) && <div className='fixed absolute bg-gray-100 opacity-90 my-[43px] w-[27rem] border-gray-100 border p-2 rounded-lg shadow-lg'>
       <ul>
       {SuggestionList.map(List=> <li className='px-3 py-2 hover:bg-gray-100' key={List}>{List}</li>)}
        

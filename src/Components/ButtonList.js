@@ -1,6 +1,8 @@
 import React from 'react'
 import Buttons from './Buttons'
 
+
+
 const ButtonList = () => {
   return (
   
@@ -10,7 +12,7 @@ const ButtonList = () => {
     <Buttons title="Music"/>
     <Buttons title="News"/>
     <Buttons title="Dhee"/>
-    <Buttons title="Live"/>
+      <Buttons title="Live"/>
     <Buttons title="Game Shows"/>
     </div>
 

@@ -4,6 +4,7 @@ const configSlice=createSlice({
     name:"config",
     initialState:{
         changeSideBar:true,
+        toggleButton:true,
     },
     reducers:
     {
@@ -14,8 +15,12 @@ const configSlice=createSlice({
         closeSideBar:(state)=>
         {
             state.changeSideBar= false;
+        },
+        AddtoggleButton:(state)=>
+        {
+            state.toggleButton=!state.toggleButton
         }
     }
 })
-export const {getSideBar,closeSideBar}=configSlice.actions
+export const {getSideBar,closeSideBar,AddtoggleButton}=configSlice.actions
 export  default configSlice.reducer

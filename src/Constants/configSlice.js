@@ -5,6 +5,11 @@ const configSlice=createSlice({
     initialState:{
         changeSideBar:true,
         toggleButton:true,
+        allButton:true,
+        musicButton:false,
+        newsButton:false,
+        sportsButon:false,
+        liveButton:false,
     },
     reducers:
     {
@@ -18,9 +23,29 @@ const configSlice=createSlice({
         },
         AddtoggleButton:(state)=>
         {
-            state.toggleButton=!state.toggleButton
-        }
+            state.toggleButton= !state.toggleButton
+        },
+        addAllButton:(state,action)=>
+        {
+            state.allButton=!state.allButton;
+        },
+        addMusicButton:(state,action)=>
+        {
+            state.musicButton=!state.musicButton
+        },
+        addNewsButton:(state,action)=>
+        {
+            state.newsButton=!state.newsButton
+        },
+        addSportsButton:(state)=>
+        {
+            state.sportsButon=!state.sportsButon;
+        },
+        addLiveButton:(state)=>
+        {
+            state.liveButtonv=!state.liveButton;
+        },
     }
 })
-export const {getSideBar,closeSideBar,AddtoggleButton}=configSlice.actions
+export const {getSideBar,closeSideBar,AddtoggleButton,addAllButton,addMusicButton,addNewsButton,addSportsButton,addLiveButton}=configSlice.actions
 export  default configSlice.reducer

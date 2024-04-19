@@ -1,23 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddtoggleButton } from '../Constants/configSlice';
+import { AddtoggleButton, addAllButton, addMusicButton, addNewsButton } from '../Constants/configSlice';
 import CardContainer from './CardContainer';
 
-const Buttons = ({titles}) => {
 
-  const dispatch=useDispatch();
-  const vedios=useSelector(store=>store.vedios)
-  const toggleButton=useSelector(store=>store.config.toggleButton);
+const Buttons = ({title,button,functionOnclick}) => {
 
-  const OnclickAll=()=>
-  {
-    dispatch(AddtoggleButton());
-    toggleButton && <CardContainer  vedio={vedios.popularVedio}/>
-  }
+
+ 
   return (
     <div className='flex m-2 mx-1 p-2'>
       
-   <button  onClick={OnclickAll} className='text-bold py-1 px-4 bg-gray-200 rounded-lg'>All</button>
+   <button  onClick={functionOnclick} className={button ?  "bg-black text-white text-bold py-1 px-4  rounded-lg":"bg-gray-200 text-bold py-1 px-4  rounded-lg"}>{title}</button>
     </div>
   )
 }

@@ -11,18 +11,23 @@ import usePopularVedios from '../Constants/usePopularVedios';
 
 const MainContainer = () => {
 
-   
-  
+  const vedios=useSelector(store=>store.vedios);
+  const allButton=useSelector(store=>store.config.allButton);
+  const musicButton=useSelector(store=>store.config.musicButton);
+  const newsButton=useSelector(store=>store.config.newsButton);
+  const sportsButton=useSelector(store=>store.config.sportsButtonButton);
 
   return (
     <div className='flex flex-col '>
    
 <ButtonList />
 
-{/* {toggleButton &&
-
-<CardContainer  vedio={vedios.sportsVedio}/>} */}
-
+<div>
+{allButton &&<CardContainer  vedio={vedios.popularVedio}/>}
+{musicButton &&<CardContainer  vedio={vedios.musicVedio}/>}
+{newsButton &&<CardContainer  vedio={vedios.newsVedio}/>}
+{sportsButton &&<CardContainer  vedio={vedios.sportsVedio}/>}
+</div>
 
 
      </div>

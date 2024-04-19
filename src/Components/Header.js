@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSideBar } from '../Constants/configSlice'
-import { YOUTUBE_SEARCH_SUGGEST } from '../Constants/useConstant';
+import { YOUTUBE_API_KEY, YOUTUBE_SEARCH_SUGGEST } from '../Constants/useConstant';
 import { getSearchCache } from '../Constants/suggestionSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
 const [SearchText,setSearchText]=useState("");
-const [SuggestionList,setSuggestionList]=useState([]);
+const [SuggestionList,setSuggestionList]=useState(null);
 const [SuggestionOpen,setSuggestionOpen]=useState(false);
 
     const dispatch=useDispatch();
+    const navigate=useNavigate();
     const handleSideMenuBar=()=>
     {
         dispatch(getSideBar());
@@ -49,6 +51,17 @@ useEffect(()=>
   }
 },[SearchText])
 
+const onClickSuggestion=(e)=>
+
+{
+    const suggestiontext=(e.target.innerText).split(" ").join("+");
+    console.log(suggestiontext);
+    setSuggestionOpen(false);
+     navigate("/results?search_query="+suggestiontext);
+     
+
+}
+
 
 
   return (
@@ -70,7 +83,7 @@ useEffect(()=>
 </button>
 {(SuggestionOpen && SearchText.length>0) && <div className='fixed absolute bg-gray-100 opacity-90 my-[43px] w-[27rem] border-gray-100 border p-2 rounded-lg shadow-lg'>
       <ul>
-      {SuggestionList.map(List=> <li className='px-3 py-2 hover:bg-gray-100' key={List}>{List}</li>)}
+      {SuggestionList.map((List)=> <li onMouseDown={(e)=>onClickSuggestion(e)} className='px-3 py-2 hover:bg-gray-100'   key={List} >{List}</li>)}
        
       
 
@@ -78,8 +91,14 @@ useEffect(()=>
       </div>}
 </div>
 
-<div className='col-span-1'>
-    <img alt='user logo' className='h-8'  src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"/>
+<div className="">
+  <div className='flex border border-gray-400 rounded-full my-2 items-center col-span-1'>
+
+  <img alt='user logo' className='h-8 p-1'  src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"/>
+    <h4>Sign In</h4>
+    
+    </div>
+    
 </div>
 
 

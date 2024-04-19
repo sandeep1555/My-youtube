@@ -8,6 +8,7 @@ const VediosSlice=createSlice({
         newsVedio:null,
         liveVedio:null,
         sportsVedio:null,
+        searchVedio:null,
     },
     reducers:{
         getPopularVedio:(state,action)=>
@@ -30,8 +31,12 @@ const VediosSlice=createSlice({
         {
              state.liveVedio=action.payload;
         },
+        getSearchVedio:(state,action)=>
+        {
+             state.searchVedio=action.payload;
+        },
     }
 })
 
-export const {getPopularVedio,getMusicVedio,getNewsVedio,getLiveVedio,getSportsVedio}=VediosSlice.actions;
+export const {getPopularVedio,getMusicVedio,getNewsVedio,getLiveVedio,getSportsVedio,getSearchVedio}=VediosSlice.actions;
 export default VediosSlice.reducer

@@ -1,4 +1,4 @@
-export const YOUTUBE_API_KEY="AIzaSyAGBhWKXzTtCHl-hjsWbAK9JG1oCk7HMVA";
+export const YOUTUBE_API_KEY="AIzaSyBtwyL0T1FkF2TmDyhLmW5W_yG57nxfDHM";
 
 
 export const YOUTUBE_API="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=IN&key="+YOUTUBE_API_KEY;
@@ -11,7 +11,7 @@ export const YOUTUBE_SEARCH_SUGGEST="http://suggestqueries.google.com/complete/s
 
 export const YOUTUBE_LIVE_VEDIOS="https://www.googleapis.com/youtube/v3/search?key="+YOUTUBE_API_KEY+"&part=snippet&type=video&q=live&eventType=live";
 
-
+export const YOUTUBE_SEARCH_QUERY="https://www.googleapis.com/youtube/v3/search?part=snippet&q={SEARCH_QUERY}&key="+YOUTUBE_API_KEY;
 
 export function makeid(length) {
     let result = '';

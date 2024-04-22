@@ -3,6 +3,7 @@ import configReducer from "./configSlice";
 import searchcacheReducer from "./suggestionSlice.js"
 import chatSlice from "./chatSlice.js";
 import VediosSlice from "./VediosSlice.js";
+import userSilce from "./userSilce.js";
 
 const appStore=configureStore({
     reducer:
@@ -11,6 +12,7 @@ const appStore=configureStore({
       searchcache:searchcacheReducer,
       livechat:chatSlice,
       vedios:VediosSlice,
+      user:userSilce,
     }
 })
 

@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSideBar } from '../Constants/configSlice'
+import { closeSideBar, getSideBar } from '../Constants/configSlice'
 import { YOUTUBE_API_KEY, YOUTUBE_SEARCH_SUGGEST } from '../Constants/useConstant';
 import { getSearchCache } from '../Constants/suggestionSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import LogIn from './LogIn';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { adduser, removeuser } from '../Constants/userSilce';
+import { auth } from '../Constants/firebase';
 
 const Header = () => {
 const [SearchText,setSearchText]=useState("");
 const [SuggestionList,setSuggestionList]=useState(null);
 const [SuggestionOpen,setSuggestionOpen]=useState(false);
+const user=useSelector(store=>store.user)
 
     const dispatch=useDispatch();
     const navigate=useNavigate();
@@ -17,6 +22,16 @@ const [SuggestionOpen,setSuggestionOpen]=useState(false);
         dispatch(getSideBar());
     }
     const SearchCache=useSelector((store)=>store.searchcache);
+
+    const handleSignout=()=>
+    {
+signOut(auth).then(() => {
+
+}).catch((error) => {
+    navigate("/login");
+  
+});
+    }
 
 const GetYoutubeSuggestion=async()=>
 {
@@ -30,6 +45,27 @@ dispatch(getSearchCache({
 
 
 }
+
+
+useEffect(()=>
+  {
+
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    
+    const {uid,email,displayName} = user;
+    dispatch(adduser({uid:uid,email:email,displayName:displayName}))
+    navigate("/");
+    
+  } else {
+    dispatch(removeuser())
+    navigate("/login")
+    
+  }
+});
+  })
 useEffect(()=>
 {
   const timer=setTimeout(()=>
@@ -56,10 +92,16 @@ const onClickSuggestion=(e)=>
 {
     const suggestiontext=(e.target.innerText).split(" ").join("+");
     console.log(suggestiontext);
+    setSearchText(e.target.innerText)
     setSuggestionOpen(false);
+    dispatch(closeSideBar());
      navigate("/results?search_query="+suggestiontext);
      
 
+}
+const handleSignInbutton=()=>
+{
+  navigate("/login");
 }
 
 
@@ -67,23 +109,23 @@ const onClickSuggestion=(e)=>
   return (
     <div className="grid grid-flow-col m-2 p-2 sticky">
 
-<div className='flex items-center col-span-1 '>
+<div className='flex items-center col-span-2 '>
     <img  onClick={handleSideMenuBar}  className='h-10 cursor-pointer'  alt="menu icon" src="https://w7.pngwing.com/pngs/616/930/png-transparent-hamburger-button-computer-icons-menu-bar-line-thumbnail.png"/>
     <img  className='h-8 px-4'alt='logo' src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1280px-YouTube_Logo_2017.svg.png"/>
 </div>
 
 
-<div className='col-span-10 ml-40 flex'>
+<div className='col-span-11 ml-40 flex'>
 
-    <input  className="w-1/2  rounded-l-full p-2 border border-gray-400 px-5" type="text" placeholder='Search ' value={SearchText} onChange={(e)=>setSearchText(e.target.value)}  onFocus={()=>setSuggestionOpen(true)} onBlur={()=>setSuggestionOpen(false)} />
+    <input  className="w-7/12 rounded-l-full p-2 border border-gray-400 px-5" type="text" placeholder='Search ' value={SearchText} onChange={(e)=>setSearchText(e.target.value)}  onFocus={()=>setSuggestionOpen(true)} onBlur={()=>setSuggestionOpen(false)} />
     <button  className='rounded-r-full border border-gray-400 p-2 px-6 bg-gray-100'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
     
   <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
 </svg>
 </button>
-{(SuggestionOpen && SearchText.length>0) && <div className='fixed absolute bg-gray-100 opacity-90 my-[43px] w-[27rem] border-gray-100 border p-2 rounded-lg shadow-lg'>
+{(SuggestionOpen && SearchText.length>0) && <div className='fixed absolute bg-gray-100 opacity-90 my-[43px] w-[484px] border-gray-100 border p-2 rounded-xl shadow-lg mt-[52px]'>
       <ul>
-      {SuggestionList.map((List)=> <li onMouseDown={(e)=>onClickSuggestion(e)} className='px-3 py-2 hover:bg-gray-100'   key={List} >{List}</li>)}
+      {SuggestionList.map((List)=> <li onMouseDown={(e)=>onClickSuggestion(e)} className='px-3 py-2 hover:bg-gray-300'   key={List} >{List}</li>)}
        
       
 
@@ -92,10 +134,12 @@ const onClickSuggestion=(e)=>
 </div>
 
 <div className="">
-  <div className='flex border border-gray-400 rounded-full my-2 items-center col-span-1'>
+  <div className='flex border border-blue-500 hover:bg-blue-200 rounded-full my-2 items-center w-[100px] text-blue-500'>
 
-  <img alt='user logo' className='h-8 p-1'  src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"/>
-    <h4>Sign In</h4>
+{user ? <button  onClick={handleSignInbutton}className='flex p-2 font-bold' ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg>
+Sign in</button> : <button onClick={handleSignout}>Sign out</button>}
     
     </div>
     

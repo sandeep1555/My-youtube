@@ -9,12 +9,15 @@ import LiveChat from './LiveChat';
 import LiveChatContainer from './LiveChatContainer';
 
 const WatchPage = () => {
+
+  
 const [watchPageVedio,setwatchPageVedio]=useState([]);
 const [SideListVedio,setSideListVedio]=useState([]);
 const dispatch=useDispatch();
     const [serachparams]=useSearchParams();
     const vedioId=serachparams.get("v");
-    const categoryId= watchPageVedio.snippet?.categoryId;
+    const categoryId= watchPageVedio?.snippet?.categoryId;
+    console.log(vedioId);
   
    
 
@@ -26,10 +29,10 @@ useEffect(()=>
 
 const getVedioByid=async()=>
 {
-    const data=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+vedioId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics");
+    const data=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+vedioId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics%2CcontentDetails");
 const json=await data.json();
 setwatchPageVedio(json.items[0])
-console.log(json.items[0])
+console.log(json)
 
 }
 useEffect(()=>
@@ -47,7 +50,7 @@ useEffect(()=>
   }
 useEffect(()=>
 {
-  CategoryVedios();
+ watchPageVedio && CategoryVedios();
 
 },[])
 
@@ -83,9 +86,9 @@ if(watchPageVedio && SideListVedio)
 <CommentContainer/>
     </div>
     <div className='flex flex-col'>
- {/* {SideListVedio.map((vedio=>(
+ {SideListVedio.map((vedio=>(
   <SideList  key={vedio.id} info={vedio}/>
- )))} */}
+ )))}
 
  <LiveChatContainer/>
 

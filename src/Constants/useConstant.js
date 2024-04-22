@@ -1,4 +1,4 @@
-export const YOUTUBE_API_KEY="AIzaSyBtwyL0T1FkF2TmDyhLmW5W_yG57nxfDHM";
+export const YOUTUBE_API_KEY="AIzaSyCmgcj-gUR8p6jumJgB92lbzrMPRSPUIMY";
 
 
 export const YOUTUBE_API="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=IN&key="+YOUTUBE_API_KEY;
@@ -55,3 +55,18 @@ export function Namegenerate() {
 return  nameList[Math.floor(Math.random() * nameList.length)];
      
     };
+
+
+
+
+    export const CheckValidation=(email,password)=>
+    {
+         const IsvalidEmail=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+         const IsvalidPassword=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
+    
+    
+         if(!IsvalidEmail) return "Email ID is not valid"
+         if(!IsvalidPassword) return "Password is not valid"
+    
+         return null;
+    }    

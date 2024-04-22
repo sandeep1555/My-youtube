@@ -1,9 +1,9 @@
 import React from 'react'
 
-const SearchList = ({vedio}) => {
+const SearchList = ({vedios}) => {
 
-    const {snippet}=vedio;
-    const {channelTitle,title,thumbnails}=snippet;
+    const {snippet}=vedios;
+    const {channelTitle,title,thumbnails,description}=snippet;
 
   return (
     <div className='flex p-2 m-2 '>
@@ -11,9 +11,10 @@ const SearchList = ({vedio}) => {
         <img  alt='img' className="rounded-lg w-[500px]" src={thumbnails.medium.url} />
         </div>
 
-        <div className='w-72 m-2'>
-            <p className='font-medium w-72 text-xl '>{title}</p>
-            <p cl>{channelTitle}</p>
+        <div className=' m-2'>
+            <p className='font-medium  text-xl '>{title}</p>
+            <p className='mt-10'>{channelTitle}</p>
+            <p className='mt-4'> {description}</p>
             {/* <p>{viewCount} views</p> */}
         </div>
         

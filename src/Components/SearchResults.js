@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { YOUTUBE_API_KEY } from '../Constants/useConstant';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSearchVedio } from '../Constants/VediosSlice';
@@ -11,7 +11,18 @@ const SearchResults = () => {
   const suggestiontext=searchparams.get("search_query");
   console.log(suggestiontext)
   const dispatch=useDispatch();
-  const searchVedio=useSelector(store=>store.vedios.searchVedio)
+  const searchVedio=useSelector(store=>store.vedios.searchVedio);
+  
+  useEffect(()=>
+  {
+    suggestionVedios();
+  },[suggestiontext])
+
+
+
+
+
+
 
 const suggestionVedios=async()=>
 {
@@ -20,18 +31,26 @@ const suggestionVedios=async()=>
   console.log(json.items);
   dispatch(getSearchVedio(json?.items));
 }
+
+
+  searchVedio && searchVedio.map(vedio=> console.log());
+
   useEffect(()=>
   {
     suggestionVedios();
   },[])
+
+
+  
   return (
 
-
+    searchVedio && 
     <div>
       <ButtonList/>
-     {  searchVedio &&  searchVedio.map(vedio=>
+     {  searchVedio.map((vedio)=>
       (
-        <SearchList vedio={vedio} />
+       
+        <Link  key={vedio.id.vedioId} to={"/watch?v="+ vedio.id?.videoId}><SearchList  vedios={vedio} /></Link>
       ))}
      
 

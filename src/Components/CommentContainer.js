@@ -8,30 +8,30 @@ const CommentContainer = () => {
 const commentsData=[
     {
         name:"sandeep",
-        text:"nice vedio",
+        text:"nice video",
         replies:[
             {
                 name:"sandeep",
-                text:"nice vedio",
+                text:"nice video",
                 replies:[],
             },{
                 name:"sandeep",
-                text:"nice vedio",
+                text:"nice video",
                 replies:[
                     {
                         name:"sandeep",
-                        text:"nice vedio",
+                        text:"nice video",
                         replies:[],
                     },{
                         name:"sandeep",
-                        text:"nice vedio",
+                        text:"nice video",
                         replies:[{
                             name:"sandeep",
-                            text:"nice vedio",
+                            text:"nice video",
                             replies:[],
                         },{
                             name:"sandeep",
-                            text:"nice vedio",
+                            text:"nice video",
                             replies:[],
                         },
                     ],
@@ -39,29 +39,29 @@ const commentsData=[
                 ],
             },{
                 name:"sandeep",
-                text:"nice vedio",
+                text:"nice video",
                 replies:[],
             }
         ],
     },
     {
         name:"sandeep",
-        text:"nice vedio",
+        text:"nice video",
         replies:[],
     },
     {
         name:"sandeep",
-        text:"nice vedio",
+        text:"nice video",
         replies:[],
     },
     {
         name:"sandeep",
-        text:"nice vedio",
+        text:"nice video",
         replies:[],
     },
     {
         name:"sandeep",
-        text:"nice vedio",
+        text:"nice video",
         replies:[],
     }
 ]

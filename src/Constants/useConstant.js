@@ -1,15 +1,15 @@
-export const YOUTUBE_API_KEY="AIzaSyCmgcj-gUR8p6jumJgB92lbzrMPRSPUIMY";
+export const YOUTUBE_API_KEY="AIzaSyBcUYrvUhEQIYSovBjcWaonlAT1uTnEsIU";
 
 
 export const YOUTUBE_API="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=IN&key="+YOUTUBE_API_KEY;
 
-export const YOUTUBE_VEDIO_ID="https://www.googleapis.com/youtube/v3/videos?id=VIDEO_ID&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics"
+export const YOUTUBE_video_ID="https://www.googleapis.com/youtube/v3/videos?id=VIDEO_ID&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics"
 
 export const YOUTUBE_CATEGORIES="https://www.googleapis.com/youtube/v3/search?part=snippet?part=statistics&type=video&videoCategoryId=Your_Category_ID_Here&key="
 
 export const YOUTUBE_SEARCH_SUGGEST="http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q="
 
-export const YOUTUBE_LIVE_VEDIOS="https://www.googleapis.com/youtube/v3/search?key="+YOUTUBE_API_KEY+"&part=snippet&type=video&q=live&eventType=live";
+export const YOUTUBE_LIVE_videoS="https://www.googleapis.com/youtube/v3/search?key="+YOUTUBE_API_KEY+"&part=snippet&type=video&q=live&eventType=live";
 
 export const YOUTUBE_SEARCH_QUERY="https://www.googleapis.com/youtube/v3/search?part=snippet&q={SEARCH_QUERY}&key="+YOUTUBE_API_KEY;
 

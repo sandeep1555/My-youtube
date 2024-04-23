@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovieVedio, getMusicVedio, getPopularVedio } from './VediosSlice';
+import { getMovievideo, getMusicvideo, getPopularvideo } from './VideosSlice';
 import { YOUTUBE_API, YOUTUBE_API_KEY } from './useConstant';
 
-const useMusicVedios = () => {
+const useMusicvideos = () => {
 
     const dispatch=useDispatch();
-    const getMusicVedios= async() =>
+    const getMusicvideos= async() =>
     {
         const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=music&type=video&key="+YOUTUBE_API_KEY);
         const json=await data.json();
-        console.log(json.items)
-       dispatch(getMusicVedio(json.items));
+
+       dispatch(getMusicvideo(json.items));
     }
     useEffect(()=>
     {
-       getMusicVedios() ;
+       getMusicvideos() ;
     },[]);
   
 }
 
-export default useMusicVedios
+export default useMusicvideos

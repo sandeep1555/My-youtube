@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovieVedio, getMusicVedio, getPopularVedio, getSportsVedio } from './VediosSlice';
+import { getMovievideo, getMusicvideo, getPopularvideo, getSportsvideo } from './VideosSlice';
 import { YOUTUBE_API, YOUTUBE_API_KEY } from './useConstant';
 
-const useSportsVedios = () => {
+const useSportsvideos = () => {
 
     const dispatch=useDispatch();
-    const getSportVedios= async() =>
+    const getSportvideos= async() =>
     {
         const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=sports&type=video&key="+YOUTUBE_API_KEY);
         const json=await data.json();
-        console.log(json.items)
-       dispatch(getSportsVedio(json.items));
+    
+       dispatch(getSportsvideo(json.items));
     }
     useEffect(()=>
     {
-       getSportVedios() ;
+       getSportvideos() ;
     },[]);
   
 }
 
-export default useSportsVedios
+export default useSportsvideos

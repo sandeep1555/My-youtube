@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import VedioCard from './VedioCard';
+import videoCard from './VideoCard';
 import { YOUTUBE_API_KEY } from '../Constants/useConstant';
 
 const SideList = ({info}) => {

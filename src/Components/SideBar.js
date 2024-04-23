@@ -7,7 +7,7 @@ const SideBar = () => {
  if(!SideBarValue) return null;
  
     return  (
-    <div className='w-2/12 text-center p-2  m-2 shadow-lg min-w-56'>
+    <div className='w-2/12 text-center p-2  m-2 shadow-lg min-w-[240px]'>
         <div className=''>
         <ul className='p-2  '>
             <Link to="/"><li className='hover:bg-gray-100 py-2 rounded-lg'>Home</li> </Link>
@@ -20,7 +20,7 @@ const SideBar = () => {
             <li className='hover:bg-gray-100 py-2 rounded-lg text-left px-2 text-bold text-xl'>You</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg text-center'>Your Channel</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg text-center'>History</li>
-            <li className='hover:bg-gray-100 py-2 rounded-lg text-center'>Your Vedios</li>
+            <li className='hover:bg-gray-100 py-2 rounded-lg text-center'>Your videos</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg text-center'>Watch Later</li>
 
         </ul>

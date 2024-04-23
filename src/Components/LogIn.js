@@ -5,10 +5,12 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { useDispatch } from 'react-redux';
 import { adduser } from '../Constants/userSilce';
 import { auth } from '../Constants/firebase';
+import {useNavigate } from 'react-router-dom';
 const LogIn = () => {
 const email=useRef(null);
 const password=useRef(null);
 const name=useRef(null)
+const navigate=useNavigate();
 const [signInform,setsignInform]=useState(true);
 const [Errormessage,setErrorMessage]=useState(null);
 
@@ -28,6 +30,8 @@ if(message) return;
           .then((userCredential) => {
 
             const user = userCredential.user;
+            navigate("/");
+            
  
           })
           .catch((error) => {
@@ -44,7 +48,6 @@ if(message) return;
           .then((userCredential) => {
  
             const user = userCredential.user;
-            console.log(auth.currentUser)
             updateProfile(user,{
                 displayName:name.current.value
             })
@@ -62,7 +65,7 @@ if(message) return;
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            setErrorMessage()
+            setErrorMessage(error+errorMessage) ;
             // ..
           });
 
@@ -101,10 +104,10 @@ if(message) return;
            <input  className="p-2   w-[300px] border-2 border-gray-300 rounded-lg" type="password" alt='password' placeholder="re-enter password"/>
            </div>}
             </div>
-            <p className='text-red-600 p-2 flex '><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            { Errormessage && <p className='text-red-600 p-2 flex '><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
 </svg>
-{Errormessage}</p>
+{Errormessage}</p>}
             <div className={ signInform ?'flex items-center justify-center': "flex  items-center "}>
                 <button className='border m-2 p-2 border-black w-[140px]' onClick={()=>setsignInform(!signInform)}>{signInform?"create account":"have account,sign in"}</button>
                 <button  onClick={handleSignInbutton} className='border m-2  mx-4 p-2 border-black'>{signInform?"Signin":"SignUp"}</button>

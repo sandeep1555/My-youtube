@@ -1,22 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SideBar from './SideBar'
 import MainContainer from './MainContainer'
-import { useSelector } from 'react-redux'
-import { Outlet } from 'react-router-dom'
-import usePopularVedios from '../Constants/usePopularVedios'
-import useMusicVedios from '../Constants/useMusicVedios'
-import useNewsVedios from '../Constants/useNewsVedios'
-import useLiveVedios from '../Constants/useLiveVedios'
-import useSportsVedios from '../Constants/useSportsVedios'
+import { useDispatch, useSelector } from 'react-redux'
+import { Outlet, useNavigate } from 'react-router-dom'
+import usePopularvideos from '../Constants/usePopularvideos'
+import useMusicvideos from '../Constants/useMusicvideos'
+import useNewsvideos from "../Constants/useNewsVideos"
+import useLivevideos from '../Constants/useLivevideos'
+import useSportsvideos from '../Constants/useSportsvideos'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../Constants/firebase'
+import { adduser, removeuser } from '../Constants/userSilce'
 
 
 const Body = () => {
+const dispatch=useDispatch();
+const navigate=useNavigate();
+  usePopularvideos();
+  useMusicvideos();
+  useNewsvideos();
+  useLivevideos();
+  useSportsvideos();
+  useEffect(()=>
+  {
 
-  usePopularVedios();
-  useMusicVedios();
-  useNewsVedios();
-  useLiveVedios();
-  useSportsVedios();
+const unsubsribe=onAuthStateChanged(auth, (user) => {
+if (user) {
+  
+  const {uid,email,displayName,photoURL}  = user;
+  dispatch(adduser({uid:uid,email: email,displayName:displayName,photoURL: photoURL}));
+  navigate("/");
+ 
+} else {
+  dispatch(removeuser());
+  navigate("/");
+  
+}
+return ()=> unsubsribe();
+});
+  },[]);
 
 
   return (

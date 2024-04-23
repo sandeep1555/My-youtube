@@ -19,7 +19,27 @@ import { adduser, removeuser } from './Constants/userSilce';
 function App() {
 const dispatch=useDispatch();
 const navigate=useNavigate();
-  
+const auth = getAuth();
+
+useEffect(()=>
+  {
+
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    
+    const {uid,email,displayName} = user;
+    dispatch(adduser({uid:uid,email:email,displayName:displayName}))
+    navigate("/");
+    
+  } else {
+    dispatch(removeuser())
+    navigate("/login")
+    
+  }
+});
+  },[])
    
   return (
      

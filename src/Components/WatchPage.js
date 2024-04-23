@@ -11,13 +11,13 @@ import LiveChatContainer from './LiveChatContainer';
 const WatchPage = () => {
 
   
-const [watchPageVedio,setwatchPageVedio]=useState([]);
-const [SideListVedio,setSideListVedio]=useState([]);
+const [watchPagevideo,setwatchPagevideo]=useState([]);
+const [SideListvideo,setSideListvideo]=useState([]);
 const dispatch=useDispatch();
     const [serachparams]=useSearchParams();
-    const vedioId=serachparams.get("v");
-    const categoryId= watchPageVedio?.snippet?.categoryId;
-    console.log(vedioId);
+    const videoId=serachparams.get("v");
+    const categoryId= watchPagevideo?.snippet?.categoryId;
+   
   
    
 
@@ -27,30 +27,30 @@ useEffect(()=>
    dispatch(closeSideBar());
 })
 
-const getVedioByid=async()=>
+const getvideoByid=async()=>
 {
-    const data=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+vedioId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics%2CcontentDetails");
+    const data=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics%2CcontentDetails");
 const json=await data.json();
-setwatchPageVedio(json.items[0])
-console.log(json)
+setwatchPagevideo(json.items[0])
+
 
 }
 useEffect(()=>
 {
-    getVedioByid();
+    getvideoByid();
 },[]);
 
 
-  const CategoryVedios=async()=>
+  const Categoryvideos=async()=>
   {
-    const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&vedioCategoryId="+categoryId+"&key="+YOUTUBE_API_KEY);
+    const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&videoCategoryId="+categoryId+"&key="+YOUTUBE_API_KEY);
     const json=await data.json();
-    setSideListVedio(json.items)
+    setSideListvideo(json.items)
     
   }
 useEffect(()=>
 {
- watchPageVedio && CategoryVedios();
+ watchPagevideo && Categoryvideos();
 
 },[])
 
@@ -58,18 +58,18 @@ useEffect(()=>
 
 
 
-if(watchPageVedio && SideListVedio)
+if(watchPagevideo && SideListvideo)
   return  (
     <div className='flex flex-row'>
     <div className='col-span-11 m-2 p-2 '>
 
-<iframe  className="rounded-lg" width="950" height="500" src={"https://www.youtube.com/embed/"+vedioId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<h1 className='p-2  font-bold text-2xl max-w-[950px]'>{watchPageVedio.snippet?.title}</h1>
+<iframe  className="rounded-lg" width="950" height="500" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h1 className='p-2  font-bold text-2xl max-w-[950px]'>{watchPagevideo.snippet?.title}</h1>
 <div className='flex items-center'>
     <img className="rounded-full bg-gray-400 w-12 h-12"  src=""/>
     <div>
-<h2 className='mx-2 text-l font-bold '>{watchPageVedio.snippet?.channelTitle}</h2>
-<p className='mx-2'>{watchPageVedio.statistics?.viewCount}views</p>
+<h2 className='mx-2 text-l font-bold '>{watchPagevideo.snippet?.channelTitle}</h2>
+<p className='mx-2'>{watchPagevideo.statistics?.viewCount}views</p>
 </div>
 <button className='px-4 text-white bg-black mx-3 py-2 rounded-full '>Subcribe</button>
 <button className=' ml-[210px] px-4 bg-gray-100 py-2 rounded-l-full border-r-2 pr-10 '>👍🏻</button>
@@ -86,8 +86,8 @@ if(watchPageVedio && SideListVedio)
 <CommentContainer/>
     </div>
     <div className='flex flex-col'>
- {SideListVedio.map((vedio=>(
-  <SideList  key={vedio.id} info={vedio}/>
+ {SideListvideo.map((video=>(
+  <SideList  key={video.id} info={video}/>
  )))}
 
  <LiveChatContainer/>

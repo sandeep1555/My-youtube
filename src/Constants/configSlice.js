@@ -43,7 +43,7 @@ const configSlice=createSlice({
         },
         addLiveButton:(state)=>
         {
-            state.liveButtonv=!state.liveButton;
+            state.liveButton=!state.liveButton;
         },
     }
 })

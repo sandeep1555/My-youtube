@@ -13,7 +13,8 @@ const Header = () => {
 const [SearchText,setSearchText]=useState("");
 const [SuggestionList,setSuggestionList]=useState(null);
 const [SuggestionOpen,setSuggestionOpen]=useState(false);
-const user=useSelector(store=>store.user)
+const user=useSelector(store=>store.user);
+
 
     const dispatch=useDispatch();
     const navigate=useNavigate();
@@ -26,12 +27,17 @@ const user=useSelector(store=>store.user)
     const handleSignout=()=>
     {
 signOut(auth).then(() => {
+  navigate("/");
 
 }).catch((error) => {
-    navigate("/login");
+    navigate("/");
   
 });
     }
+
+
+    
+    
 
 const GetYoutubeSuggestion=async()=>
 {
@@ -47,25 +53,7 @@ dispatch(getSearchCache({
 }
 
 
-useEffect(()=>
-  {
 
-
-const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    
-    const {uid,email,displayName} = user;
-    dispatch(adduser({uid:uid,email:email,displayName:displayName}))
-    navigate("/");
-    
-  } else {
-    dispatch(removeuser())
-    navigate("/login")
-    
-  }
-});
-  })
 useEffect(()=>
 {
   const timer=setTimeout(()=>
@@ -91,7 +79,7 @@ const onClickSuggestion=(e)=>
 
 {
     const suggestiontext=(e.target.innerText).split(" ").join("+");
-    console.log(suggestiontext);
+
     setSearchText(e.target.innerText)
     setSuggestionOpen(false);
     dispatch(closeSideBar());
@@ -102,7 +90,9 @@ const onClickSuggestion=(e)=>
 const handleSignInbutton=()=>
 {
   navigate("/login");
+
 }
+
 
 
 
@@ -123,9 +113,9 @@ const handleSignInbutton=()=>
   <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
 </svg>
 </button>
-{(SuggestionOpen && SearchText.length>0) && <div className='fixed absolute bg-gray-100 opacity-90 my-[43px] w-[484px] border-gray-100 border p-2 rounded-xl shadow-lg mt-[52px]'>
+{(SuggestionOpen && SearchText.length>0) && <div className='fixed absolute bg-gray-100 opacity-90 my-[43px] w-[470px] border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px]'>
       <ul>
-      {SuggestionList.map((List)=> <li onMouseDown={(e)=>onClickSuggestion(e)} className='px-3 py-2 hover:bg-gray-300'   key={List} >{List}</li>)}
+      {SuggestionList.map((List)=> <li onMouseDown={(e)=>onClickSuggestion(e)} className='px-3 py-2 hover:bg-gray-300 rounded-lg'   key={List} >{List}</li>)}
        
       
 
@@ -134,12 +124,17 @@ const handleSignInbutton=()=>
 </div>
 
 <div className="">
-  <div className='flex border border-blue-500 hover:bg-blue-200 rounded-full my-2 items-center w-[100px] text-blue-500'>
+  <div className='flex border border-blue-500 hover:bg-blue-200 rounded-full my-2 items-center w-[120px] text-blue-500'>
 
-{user ? <button  onClick={handleSignInbutton}className='flex p-2 font-bold' ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+{!user && <button  onClick={handleSignInbutton} className='flex p-1 font-bold' ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 </svg>
-Sign in</button> : <button onClick={handleSignout}>Sign out</button>}
+Sign in</button>} 
+
+{user && <button  onClick={handleSignout} className='flex p-1 font-bold' ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg>
+Sign out</button>}
     
     </div>
     
@@ -152,4 +147,4 @@ Sign in</button> : <button onClick={handleSignout}>Sign out</button>}
   )
 }
 
-export default Header
+export default Header;

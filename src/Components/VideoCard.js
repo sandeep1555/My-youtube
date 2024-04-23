@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VedioCard = ({info}) => {
+const videoCard = ({info}) => {
     const {snippet}=info;
 
     const {channelTitle,title,thumbnails}=snippet;
@@ -25,4 +25,4 @@ const VedioCard = ({info}) => {
   )
 }
 
-export default VedioCard
+export default videoCard

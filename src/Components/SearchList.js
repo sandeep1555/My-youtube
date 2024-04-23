@@ -1,14 +1,20 @@
 import React from 'react'
 
-const SearchList = ({vedios}) => {
+const SearchList = ({videos}) => {
 
-    const {snippet}=vedios;
+    const {snippet}=videos;
+    const videoId=videos.id.videoId;
     const {channelTitle,title,thumbnails,description}=snippet;
+
+
+ 
+
+
 
   return (
     <div className='flex p-2 m-2 '>
-        <div className='m-2'>
-        <img  alt='img' className="rounded-lg w-[500px]" src={thumbnails.medium.url} />
+        <div className='m-2 '>
+        <img  alt='img' className="rounded-lg min-w-[500px]" src={thumbnails.medium.url} />
         </div>
 
         <div className=' m-2'>

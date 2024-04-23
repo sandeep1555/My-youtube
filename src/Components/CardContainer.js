@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { YOUTUBE_API } from '../Constants/useConstant';
-import VedioCard from './VedioCard';
+import videoCard from './VideoCard';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPopularVedio } from '../Constants/VediosSlice';
-import usePopularVedios from '../Constants/usePopularVedios';
+import { getPopularvideo } from '../Constants/VideosSlice';
+import usePopularvideos from '../Constants/usePopularvideos';
 
-const CardContainer = ({vedio}) => {
-    
-     
+const CardContainer = ({video}) => {
+  
   return (
-    vedio&& 
-    <div className='w-10/12  m-2 flex flex-wrap '>
-        { vedio.map((vedio)=>
+   
+    <div className='w-12/12  m-2 flex flex-wrap ml-[90px] '>
+        {   video&&  video.map((video)=>
         (
-           <Link to={"/watch?v="+vedio.id}><VedioCard key={vedio.id} info={vedio}/></Link> 
+           <Link key={video.id} to={"/watch?v="+video.id?.videoId}><videoCard  info={video}/></Link> 
         ))}
         
     </div>

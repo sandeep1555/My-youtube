@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPopularVedio } from './VediosSlice';
+import { getPopularvideo } from './VideosSlice';
 import { YOUTUBE_API } from './useConstant';
 
-const usePopularVedios = () => {
+const usePopularvideos = () => {
 
     const dispatch=useDispatch();
-    const getpopularVedios= async() =>
+    const getpopularvideos= async() =>
     {
         const data=await fetch(YOUTUBE_API);
         const json=await data.json();
-        console.log(json.items)
-       dispatch(getPopularVedio(json.items));
+
+       dispatch(getPopularvideo(json.items));
     }
     useEffect(()=>
     {
-        getpopularVedios();
+        getpopularvideos();
     },[]);
   
 }
 
-export default usePopularVedios
+export default usePopularvideos

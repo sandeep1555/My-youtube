@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import configReducer from "./configSlice";
 import searchcacheReducer from "./suggestionSlice.js"
 import chatSlice from "./chatSlice.js";
-import VediosSlice from "./VediosSlice.js";
+import VideosSlice from "./VideosSlice.js";
 import userSilce from "./userSilce.js";
 
 const appStore=configureStore({
@@ -11,7 +11,7 @@ const appStore=configureStore({
       config:configReducer,
       searchcache:searchcacheReducer,
       livechat:chatSlice,
-      vedios:VediosSlice,
+      videos:VideosSlice,
       user:userSilce,
     }
 })

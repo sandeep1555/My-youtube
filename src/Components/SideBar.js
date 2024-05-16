@@ -1,16 +1,19 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+
 
 const SideBar = () => {
     const SideBarValue=useSelector(store=>store.config.changeSideBar)
  if(!SideBarValue) return null;
- 
+ const handleReload=()=>
+ {
+    window.location.reload();
+ }
     return  (
-    <div className='w-2/12 text-center p-2  m-2 shadow-lg min-w-[240px]'>
+    <div className='w-2/12 text-center p-2   shadow-lg min-w-[240px] h-screen overflow-y-auto'>
         <div className=''>
         <ul className='p-2  '>
-            <Link to="/"><li className='hover:bg-gray-100 py-2 rounded-lg'>Home</li> </Link>
+            <li onClick={handleReload} className='hover:bg-gray-100 py-2 rounded-lg'>Home</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg'>Shorts</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg'>Subcription</li>
             <li className='hover:bg-gray-100 py-2 rounded-lg'>YouTube Music</li>

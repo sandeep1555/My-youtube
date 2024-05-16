@@ -17,6 +17,7 @@ const [Errormessage,setErrorMessage]=useState(null);
 const dispatch=useDispatch();
 const handleSignInbutton=()=>
 {
+  console.log("clicked");
     const message=CheckValidation(email.current.value,password.current.value);
  
 setErrorMessage(message);
@@ -49,12 +50,13 @@ if(message) return;
  
             const user = userCredential.user;
             updateProfile(user,{
-                displayName:name.current.value
+                displayName:name.current.value,
             })
             .then(()=>
             {
                 const {uid,email,displayName,}=auth.currentUser;
-            dispatch(adduser({uid:uid,email:email,displayName:displayName}))   
+            dispatch(adduser({uid:uid,email:email,displayName:displayName}));
+            navigate("/");
             })
             .catch((error)=>
             {
@@ -110,7 +112,7 @@ if(message) return;
 {Errormessage}</p>}
             <div className={ signInform ?'flex items-center justify-center': "flex  items-center "}>
                 <button className='border m-2 p-2 border-black w-[140px]' onClick={()=>setsignInform(!signInform)}>{signInform?"create account":"have account,sign in"}</button>
-                <button  onClick={handleSignInbutton} className='border m-2  mx-4 p-2 border-black'>{signInform?"Signin":"SignUp"}</button>
+                <button  onClick={()=>handleSignInbutton()} className='border m-2  mx-4 p-2 border-black'>{signInform?"Signin":"SignUp"}</button>
 
             </div>
             

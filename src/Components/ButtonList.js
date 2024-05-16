@@ -1,47 +1,64 @@
-import React from 'react'
-import Buttons from './Buttons'
+import React, { useEffect, useState }  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import CardContainer from './CardContainer';
-import { addAllButton, addLiveButton, addMusicButton, addNewsButton } from '../Constants/configSlice';
+import {  setactiveButton } from '../Constants/configSlice';
+import useLivevideos from '../Constants/useLiveVideos';
+import Buttons from './Buttons';
+import { YOUTUBE_API_KEY } from '../Constants/useConstant';
+import { getLivevideo, getMusicvideo, getNewsvideo, getSportsvideo } from '../Constants/VideosSlice';
 
 
 
 const ButtonList = () => {
-
  
-  const dispatch=useDispatch();
-  const AllButton=useSelector(store=>store.config.allButton);
-  const MusicButton=useSelector(store=>store.config.musicButton);
-  const NewsButton=useSelector(store=>store.config.newsButton);
-  const LiveButton=useSelector(store=>store.config.liveButton);
+const buttonList=['All','Music','News','Live'];
+const dispatch=useDispatch();
+const activeButton=useSelector(store=>store.config.activeButton);
 
-  const Allfunction=()=>
-  {
-    dispatch(addAllButton());
-    
-  }
-const Musicfunction=()=>
-{
-   dispatch(addMusicButton())
-}
+const handleButtonClick = async(buttonName) => {
 
-const NewsFunction=()=>
-{
-   dispatch(addNewsButton());
-}
-const liveFunction=()=>
-{
-  dispatch(addLiveButton());
+  const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+buttonName+"&type=video&maxResults=30&key="+YOUTUBE_API_KEY);
+   const json=await data.json();
+  const liveVideosId= json.items.map((video)=>video.id.videoId).join(",");
+
+
+
+ if(liveVideosId)
+ {const dataId=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+liveVideosId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics");
+  const jsonId=await dataId.json();
+   console.log(jsonId);
+   
+  const channelIds=jsonId.items.map((video)=>video.snippet.channelId);
+  const channelDetailsProm=channelIds.map(async channelId=>
+   {
+       const data=await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet&id="+channelId+"&key="+YOUTUBE_API_KEY)
+const json=await data.json();
+      return json.items[0]
+   });
+   const channelDetails = await Promise.all(channelDetailsProm);
+
+    const videosWithChannelDetails= jsonId.items.map((video,index)=>(
+    {
+         videoInfo:video,
+         channelInfo:channelDetails[index],
+    }));
+    console.log(videosWithChannelDetails);
+  buttonName==="Live" && dispatch(getLivevideo(videosWithChannelDetails))
+  buttonName==="Music" && dispatch(getMusicvideo(videosWithChannelDetails))
+  buttonName==="News" && dispatch(getNewsvideo(videosWithChannelDetails))
+  buttonName==="Sports" && dispatch(getSportsvideo(videosWithChannelDetails))
+dispatch(setactiveButton((buttonName === activeButton ? 'All' : buttonName)));
+ }
 }
   return (
   
 
 <div className='flex  flex-col'>
-  <div className='flex'>
- <Buttons title="All"   button={AllButton}  functionOnclick={Allfunction} />
- <Buttons title="Music"  button={MusicButton} functionOnclick={Musicfunction}/>
- <Buttons title="News"  button={NewsButton} functionOnclick={NewsFunction}/>
- <Buttons title="Live"  button={LiveButton} functionOnclick={liveFunction}/>
+  <div className='flex px-4 '>
+    {buttonList.map((name)=>
+    (
+     <Buttons key={name}  buttonname={name} getCategory={handleButtonClick}   />
+    ))}
+
  </div>
 
     </div>
@@ -49,5 +66,6 @@ const liveFunction=()=>
  
   )
 }
+
 
 export default ButtonList

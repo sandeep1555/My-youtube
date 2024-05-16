@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { useParams, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { closeSideBar } from '../Constants/configSlice';
 import SideList from './SideList';
-import { YOUTUBE_API, YOUTUBE_API_BYID, YOUTUBE_API_KEY } from '../Constants/useConstant';
+import {  YOUTUBE_API_KEY } from '../Constants/useConstant';
 import CommentContainer from './CommentContainer';
-import LiveChat from './LiveChat';
 import LiveChatContainer from './LiveChatContainer';
 
 const WatchPage = () => {
@@ -17,15 +16,9 @@ const dispatch=useDispatch();
     const [serachparams]=useSearchParams();
     const videoId=serachparams.get("v");
     const categoryId= watchPagevideo?.snippet?.categoryId;
-   
-  
-   
+    console.log(categoryId)
+    
 
-
-useEffect(()=>
-{
-   dispatch(closeSideBar());
-})
 
 const getvideoByid=async()=>
 {
@@ -38,29 +31,30 @@ setwatchPagevideo(json.items[0])
 useEffect(()=>
 {
     getvideoByid();
+    dispatch(closeSideBar());
 },[]);
 
 
   const Categoryvideos=async()=>
   {
-    const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&videoCategoryId="+categoryId+"&key="+YOUTUBE_API_KEY);
+    const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&videosCategoryId="+categoryId+"&key="+YOUTUBE_API_KEY);
     const json=await data.json();
+  console.log(categoryId);
     setSideListvideo(json.items)
     
   }
 useEffect(()=>
 {
- watchPagevideo && Categoryvideos();
+  Categoryvideos();
 
 },[])
 
 
 
-
-
 if(watchPagevideo && SideListvideo)
   return  (
-    <div className='flex flex-row'>
+<div className='flex'>
+
     <div className='col-span-11 m-2 p-2 '>
 
 <iframe  className="rounded-lg" width="950" height="500" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -85,17 +79,28 @@ if(watchPagevideo && SideListvideo)
 
 <CommentContainer/>
     </div>
-    <div className='flex flex-col'>
- {SideListvideo.map((video=>(
-  <SideList  key={video.id} info={video}/>
- )))}
-
- <LiveChatContainer/>
-
-
-
-   </div>
+  
+<div className='flex flex-col'>
+  <div>
+ 
     </div>
+
+
+ { SideListvideo && SideListvideo.map((video)=>(
+  <div className=''>
+  <Link  key={video.id} to={video.id.videoId ? ("/watch?v="+video.id.videoId):("/watch?v="+video.id)} ><SideList  info={video}/></Link>
+  </div>
+ ))
+ }
+ </div>
+
+
+
+
+
+</div>
+
+  
   )
 }
 

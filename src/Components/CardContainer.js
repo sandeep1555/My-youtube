@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { YOUTUBE_API } from '../Constants/useConstant';
-import videoCard from './VideoCard';
+import React, { useEffect } from 'react'
+
+import VideoCard from './VideoCard';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPopularvideo } from '../Constants/VideosSlice';
-import usePopularvideos from '../Constants/usePopularvideos';
+
+
 
 const CardContainer = ({video}) => {
-  
+
+
   return (
    
     <div className='w-12/12  m-2 flex flex-wrap ml-[90px] '>
         {   video&&  video.map((video)=>
         (
-           <Link key={video.id} to={"/watch?v="+video.id?.videoId}><videoCard  info={video}/></Link> 
+          
+           <Link    key={video.videoInfo.id} to={video.videoInfo.id.videoId ? ("/watch?v="+video.videoInfo.id.videoId):("/watch?v="+video.videoInfo.id)}><VideoCard  videoinfo={video.videoInfo} channelinfo={video.channelInfo}/></Link> 
         ))}
         
     </div>
@@ -21,3 +22,5 @@ const CardContainer = ({video}) => {
 }
 
 export default CardContainer
+
+

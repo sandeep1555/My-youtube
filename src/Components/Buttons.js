@@ -1,19 +1,17 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AddtoggleButton, addAllButton, addMusicButton, addNewsButton } from '../Constants/configSlice';
-import CardContainer from './CardContainer';
+import {  useSelector } from 'react-redux';
 
 
-const Buttons = ({title,button,functionOnclick}) => {
+const Buttons = ({buttonname,getCategory}) => {
+    
 
+    const activeButton=useSelector(store=>store.config.activeButton);
 
- 
   return (
-    <div className='flex m-2 mx-1 p-2'>
-      
-   <button  onClick={functionOnclick} className={button ?  "bg-black text-white text-bold py-1 px-4  rounded-lg":"bg-gray-200 text-bold py-1 px-4  rounded-lg"}>{title}</button>
+    <div>
+    <button  onClick={()=>getCategory(buttonname)} className={`mr-2 px-4 py-1 rounded-lg font-medium ${ activeButton === buttonname ? 'bg-black text-white' : 'bg-gray-200 text-black'
+          }`}>{buttonname}</button>
     </div>
   )
-}
-
+        }
 export default Buttons

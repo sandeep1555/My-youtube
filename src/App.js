@@ -20,40 +20,14 @@ import { auth } from './Constants/firebase';
 function App() {
 
 
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
-  const user=useSelector(store=>store.user);
-  
-  useEffect(()=>
-    {
-  
-  const unsubsribe=onAuthStateChanged(auth, (user) => {
-  if (user) {
-     
-    const {uid,email,displayName,photoURL}  = user;
-    
-   dispatch(adduser({uid:uid,email: email,displayName:displayName,photoURL: photoURL}));
-    navigate("/");
-   
-  } else {
-    dispatch(removeuser());
-    navigate("/");
-    
-  }
-  return ()=> unsubsribe();
-  });
-    },[user]);
     
   return (
-     
     <div>
           <Header/>
            <Body/>
       
-    </div>
-   
-  );
-}
+    </div>)
+  }
 export const appRouter= createBrowserRouter([
   {
     path:"/",
@@ -64,26 +38,21 @@ export const appRouter= createBrowserRouter([
       element:<MainContainer/>,
     },
     {
-      path:"watch",
+      path:"/watch",
       element:<WatchPage/>
     },
     {
-      path:"results",
+      path:"/results",
       element:<SearchResults/>,
-    },
-    {
-
-      path:"login",
-      element:<LogIn/>,
-    },
+    }
     
     ]
-    
-    
   },
-  
-  
-  
+  {
+    path:"/login",
+    element:<LogIn/>
+  }
 ])
+
 
 export default App;

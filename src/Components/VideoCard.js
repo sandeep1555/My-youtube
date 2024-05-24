@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react'
-import { YOUTUBE_API_KEY } from '../Constants/useConstant';
-import { useDispatch, useSelector } from 'react-redux';
-import { getChannelInfo } from '../Constants/VideosSlice';
-import useChannelInfo from '../Constants/useChannelInfo';
+import { YOUTUBE_API_KEY, countToDisplaycount } from '../Constants/useConstant';
 
-
+import "/Users/sandeepdasari/Desktop/my-youtube/src/App.css"
 const VideoCard = ({videoinfo,channelinfo}) => {
 
 
@@ -15,6 +12,7 @@ const VideoCard = ({videoinfo,channelinfo}) => {
  const handleVideoContainerClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
 
   return (
 
@@ -27,10 +25,10 @@ const VideoCard = ({videoinfo,channelinfo}) => {
           <div className=' mr-2 mt-2 '  >
            <img  alt='img' className="rounded-full w-[40px] h-[40px] " src={channelinfo.snippet.thumbnails.default.url}/>
           </div>
-          <div className='w-[230px]'>
-            <p className='font-bold   '>{title}</p>
-            <p cl>{channelTitle}</p>
-         <p>{viewCount} views</p>
+          <div className='w-[230px] '>
+            <p className='font-bold truncate-2-lines'>{title}</p>
+            <p className='text-gray-600'>{channelTitle}</p>
+         <p className='text-gray-600'>{countToDisplaycount(viewCount)} views</p>
          </div>
         </div>
 

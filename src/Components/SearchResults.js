@@ -17,19 +17,26 @@ const SearchResults = () => {
   {
     suggestionvideos();
   },[suggestiontext])
-
-
-
-
-
-
-
+  
 const suggestionvideos=async()=>
 {
   const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q="+suggestiontext+"&key="+YOUTUBE_API_KEY);
   const json=await data.json();
- 
-  dispatch(getSearchvideo(json?.items));
+  const channelIds=json.items.map((video)=>video?.snippet?.channelId);
+       const channelDetailsProm=channelIds.map(async channelId=>
+        {
+            const data=await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id="+channelId+"&key="+YOUTUBE_API_KEY)
+     const json=await data.json();
+           return json.items[0]
+        });
+        const channelDetails = await Promise.all(channelDetailsProm);
+
+         const videosWithChannelDetails= json?.items?.map((video,index)=>(
+         {
+              videoInfo:video,
+              channelInfo:channelDetails[index],
+         }));
+         dispatch(getSearchvideo(videosWithChannelDetails));
 }
 
   useEffect(()=>
@@ -44,12 +51,18 @@ const suggestionvideos=async()=>
   return (
 
     searchvideo && 
-    <div>
+    <div className=''>
+      <div className='ml-[-66px] mt-4'>
       <ButtonList/>
-     {  searchvideo.map((video)=>
+      </div>
+      <p className='ml-[38px] mt-4 text-gray-600'>Showing results for <span  className='font-bold'>{suggestiontext}</span> </p>
+     { searchvideo && searchvideo.map((video)=>
       (
+        <div className='mx-4 my-4'>
+
        
-        <Link  key={video.id.videoId} to={"/watch?v="+ video.id?.videoId}><SearchList  videos={video} /></Link>
+        <Link  key={video.videoInfo.id} to={video.videoInfo.id.videoId ? ("/watch?v="+video.videoInfo.id.videoId):("/watch?v="+video.videoInfo.id)}><SearchList  videoinfo={video.videoInfo} channelinfo={video.channelInfo} /></Link>
+        </div>
       ))}
      
 

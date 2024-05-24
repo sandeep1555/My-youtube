@@ -1,15 +1,16 @@
-import React, { useEffect, useState }  from 'react'
+import React  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {  setactiveButton } from '../Constants/configSlice';
-import useLivevideos from '../Constants/useLiveVideos';
+import useLivevideos from '../CustomHooks/useLiveVideos';
 import Buttons from './Buttons';
 import { YOUTUBE_API_KEY } from '../Constants/useConstant';
 import { getLivevideo, getMusicvideo, getNewsvideo, getSportsvideo } from '../Constants/VideosSlice';
+import {  useNavigate } from 'react-router-dom';
 
 
 
 const ButtonList = () => {
- 
+ const navigate=useNavigate();
 const buttonList=['All','Music','News','Live'];
 const dispatch=useDispatch();
 const activeButton=useSelector(store=>store.config.activeButton);
@@ -47,13 +48,14 @@ const json=await data.json();
   buttonName==="News" && dispatch(getNewsvideo(videosWithChannelDetails))
   buttonName==="Sports" && dispatch(getSportsvideo(videosWithChannelDetails))
 dispatch(setactiveButton((buttonName === activeButton ? 'All' : buttonName)));
+navigate("/")
  }
 }
   return (
   
 
 <div className='flex  flex-col'>
-  <div className='flex px-4 '>
+  <div className='flex px-4 mx-[90px] '>
     {buttonList.map((name)=>
     (
      <Buttons key={name}  buttonname={name} getCategory={handleButtonClick}   />

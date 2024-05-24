@@ -1,4 +1,4 @@
-export const YOUTUBE_API_KEY="AIzaSyCu_1BPsZfLV8BLy8pvZmnPpsT9CT6I5Ng";
+export const YOUTUBE_API_KEY="AIzaSyBgjWXMGZF7LDZaZzxX-D0RJX2VOKpQLgE";
 
 
 export const YOUTUBE_API="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=IN&key="+YOUTUBE_API_KEY;
@@ -71,3 +71,27 @@ return  nameList[Math.floor(Math.random() * nameList.length)];
     
          return null;
     }    
+  export   const countToDisplaycount=(viewCount)=>
+    {
+      if(viewCount>=1000 && viewCount<=999999)
+      {
+          let value= viewCount/1000;
+          let out=value.toFixed(1);
+          return out+"k";
+      }
+      else if(viewCount>=1000000 && viewCount<=999999999 )
+      {
+          let value= viewCount/1000000;
+          let out=value.toFixed(1);
+          return out+"M";  
+      }
+      else if(viewCount>=1000000000)
+      {
+          let value= viewCount/1000000000;
+          let out=value.toFixed(1);
+          return out+"B";  
+      }
+      else{
+          return viewCount
+      }
+    }

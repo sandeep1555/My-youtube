@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App, { appRouter } from './App';
+import  { appRouter } from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider} from 'react-router-dom';
 import appStore from './Constants/appStore';
-import Body from './Components/Body';
-import MainContainer from './Components/MainContainer';
-import WatchPage from './Components/WatchPage';
-import SearchResults from './Components/SearchResults';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,10 +14,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-  
   <Provider store = {appStore}>
-   <RouterProvider router={appRouter}/>
+   <RouterProvider router={appRouter}>
+   </RouterProvider>
   </Provider>
+  
   </React.StrictMode>
   
 );

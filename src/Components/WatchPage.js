@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useSearchParams } from 'react-router-dom'
 import { closeSideBar } from '../Constants/configSlice';
 import SideList from './SideList';
 import {  YOUTUBE_API_KEY } from '../Constants/useConstant';
 import CommentContainer from './CommentContainer';
 import LiveChatContainer from './LiveChatContainer';
+import { getSideListvideo, getWatchPagevideo } from '../Constants/VideosSlice';
+import SideConatiner from './SideConatiner';
+import WatchPageVedioConatiner from './WatchPageVedioConatiner';
 
 const WatchPage = () => {
 
-  
-const [watchPagevideo,setwatchPagevideo]=useState([]);
-const [SideListvideo,setSideListvideo]=useState([]);
+  const watchPagevideo=useSelector(store=>store.videos.watchpagevideo);
 const dispatch=useDispatch();
     const [serachparams]=useSearchParams();
     const videoId=serachparams.get("v");
     const categoryId= watchPagevideo?.snippet?.categoryId;
-    console.log(categoryId)
+ 
     
 
 
@@ -24,9 +25,7 @@ const getvideoByid=async()=>
 {
     const data=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics%2CcontentDetails");
 const json=await data.json();
-setwatchPagevideo(json.items[0])
-
-
+dispatch(getWatchPagevideo(json.items[0]));
 }
 useEffect(()=>
 {
@@ -34,70 +33,11 @@ useEffect(()=>
     dispatch(closeSideBar());
 },[]);
 
-
-  const Categoryvideos=async()=>
-  {
-    const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&videosCategoryId="+categoryId+"&key="+YOUTUBE_API_KEY);
-    const json=await data.json();
-  console.log(categoryId);
-    setSideListvideo(json.items)
-    
-  }
-useEffect(()=>
-{
-  Categoryvideos();
-
-},[])
-
-
-
-if(watchPagevideo && SideListvideo)
-  return  (
+  return   ( 
 <div className='flex'>
 
-    <div className='col-span-11 m-2 p-2 '>
-
-<iframe  className="rounded-lg" width="950" height="500" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<h1 className='p-2  font-bold text-2xl max-w-[950px]'>{watchPagevideo.snippet?.title}</h1>
-<div className='flex items-center'>
-    <img className="rounded-full bg-gray-400 w-12 h-12"  src=""/>
-    <div>
-<h2 className='mx-2 text-l font-bold '>{watchPagevideo.snippet?.channelTitle}</h2>
-<p className='mx-2'>{watchPagevideo.statistics?.viewCount}views</p>
-</div>
-<button className='px-4 text-white bg-black mx-3 py-2 rounded-full '>Subcribe</button>
-<button className=' ml-[210px] px-4 bg-gray-100 py-2 rounded-l-full border-r-2 pr-10 '>👍🏻</button>
-
-<button className='px-4 bg-gray-100  py-2 rounded-r-full '>👎🏻</button>
-<butoon className='px-4 text-black bg-gray-100  py-2 rounded-full font-medium mx-4' >Share</butoon>
-<button className='px-4 text-black bg-gray-100  py-2 rounded-full font-medium '>Download</button>
-<button className='bg-gray-100 rounded-full h-10 w-10 ml-4 px-2'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-</svg>
-</button>
-</div>
-
-<CommentContainer/>
-    </div>
-  
-<div className='flex flex-col'>
-  <div>
- 
-    </div>
-
-
- { SideListvideo && SideListvideo.map((video)=>(
-  <div className=''>
-  <Link  key={video.id} to={video.id.videoId ? ("/watch?v="+video.id.videoId):("/watch?v="+video.id)} ><SideList  info={video}/></Link>
-  </div>
- ))
- }
- </div>
-
-
-
-
-
+   {watchPagevideo&& <WatchPageVedioConatiner videoId={videoId}/>} 
+<SideConatiner categoryId={categoryId}  />
 </div>
 
   

@@ -12,11 +12,13 @@ const MainContainer = () => {
   const videos=useSelector(store=>store.videos);
   const activeButton=useSelector(store=>store.config.activeButton);
   return (
-    <div className='flex flex-col  overflow-y-auto h-screen'>
-   
-<ButtonList />
+    <div className=' flex flex-col  overflow-y-auto h-screen '>
 
-<div className=''>
+<div className='bg-white  w-full pb-2 '>
+<ButtonList />
+  </div>   
+
+<div className='my-4'>
 {activeButton==='All' &&<CardContainer  video={videos.popularvideo}/>}
 {activeButton==='Music' &&<CardContainer  video={videos.musicvideo}/>}
 {activeButton==='News' &&<CardContainer  video={videos.newsvideo}/>}

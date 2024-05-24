@@ -9,7 +9,8 @@ const videosSlice=createSlice({
         livevideo:null,
         sportsvideo:null,
         searchvideo:null,
-        channelInfo:null,
+        sidelistvideo:null,
+        watchpagevideo:null,
     },
     reducers:{
         getPopularvideo:(state,action)=>
@@ -36,12 +37,17 @@ const videosSlice=createSlice({
         {
              state.searchvideo=action.payload;
         },
-        getChannelInfo:(state,action)=>
+        getSideListvideo:(state,action)=>
         {
-          state.channelInfo=action.payload;
-        }
+             state.sidelistvideo=action.payload;
+        },
+        getWatchPagevideo:(state,action)=>
+        {
+             state.watchpagevideo=action.payload;
+        },
+
     }
 })
 
-export const {getPopularvideo,getMusicvideo,getNewsvideo,getLivevideo,getSportsvideo,getSearchvideo,getChannelInfo}=videosSlice.actions;
+export const {getPopularvideo,getMusicvideo,getNewsvideo,getLivevideo,getSportsvideo,getSearchvideo,getChannelInfo,getSideListvideo,getWatchPagevideo}=videosSlice.actions;
 export default videosSlice.reducer

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovievideo, getMusicvideo, getNewsvideo, getPopularvideo } from './VideosSlice';
-import { YOUTUBE_API, YOUTUBE_API_KEY } from './useConstant';
+import { getMovievideo, getMusicvideo, getNewsvideo, getPopularvideo } from '../Constants/VideosSlice';
+import { YOUTUBE_API, YOUTUBE_API_KEY } from '../Constants/useConstant';
 
 const useNewsvideos = () => {
-
+    const newsVedio=useSelector(store=>store.videos.newsvideo)
     const dispatch=useDispatch();
     const getMusicvideos= async() =>
     {
@@ -15,7 +15,7 @@ const useNewsvideos = () => {
     }
     useEffect(()=>
     {
-       getMusicvideos() ;
+      !newsVedio && getMusicvideos() ;
     },[]);
   
 }

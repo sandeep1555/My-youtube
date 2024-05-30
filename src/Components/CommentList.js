@@ -16,7 +16,7 @@ const CommentList = ({data}) => {
 
            <div className='pl-5 border-l-2 border-black ml-5'>
               
-              <CommentList data={comment.replies}/>
+         
             </div>
             </>
         ))}

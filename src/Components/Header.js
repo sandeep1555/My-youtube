@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSideBar, getSideBar } from "../Constants/configSlice";
-import { YOUTUBE_SEARCH_SUGGEST } from "../Constants/useConstant";
+import { YOUTUBE_API_KEY, YOUTUBE_SEARCH_SUGGEST } from "../Constants/useConstant";
 import { getSearchCache } from "../Constants/suggestionSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import { auth } from "../Constants/firebase";
 import { adduser, removeuser } from "../Constants/userSilce";
 
 const Header = () => {
+
   const [SearchText, setSearchText] = useState("");
   const [SuggestionList, setSuggestionList] = useState(null);
   const [SuggestionOpen, setSuggestionOpen] = useState(false);
@@ -32,7 +33,7 @@ const Header = () => {
         dispatch(removeuser());
       })
       .catch((error) => {
-        console.log(error);
+ 
       });
   };
 
@@ -108,7 +109,7 @@ const Header = () => {
   };
 
   return (
-    <div className=" w-screen m-2 p-2  flex justify-between">
+    <div className=" w-screen m-2 p-2  flex justify-between bg-white">
       <div className="flex items-center">
         <img
           onClick={handleSideMenuBar}
@@ -173,11 +174,11 @@ const Header = () => {
           onMouseEnter={handleAccountMouseEnter}
           onMouseLeave={handleAccountMouseLeave}
         >
-          <div className="w-[50px] h-[50px]  bg-blue-500 rounded-full flex  justify-center text-white text-4xl p-1 ">
+          <div className="w-[40px] h-[40px]  bg-blue-500 rounded-full flex  justify-center text-white text-3xl p-[2px] ">
             <span>{user.displayName[0].toUpperCase()}</span>
           </div>
           {showAccount && (
-            <div className="absolute ml-[-120px]">
+            <div className="absolute ml-[-130px]">
               <button onClick={() => handleSignout()}>
                 {"Hey " + user.displayName}
                 <span className="hover:underline text-blue-500">,Sign Out</span>

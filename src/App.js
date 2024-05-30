@@ -19,8 +19,6 @@ import { auth } from './Constants/firebase';
 
 function App() {
 
-
-    
   return (
     <div>
           <Header/>

@@ -3,10 +3,9 @@ import { countToDisplaycount } from '../Constants/useConstant';
 
 
 const SideList = ({videoinfo,channelinfo}) => {
-
-  const {snippet,statistics}=videoinfo;
+  const {snippet}=videoinfo;
   const {channelTitle,title,thumbnails}=snippet;
- const {viewCount}=channelinfo.statistics;
+ const viewCount=channelinfo?.statistics?.viewCount;
 
 const handleVideoContainerClick = () => {
   // Scroll to the top of the page when the video container is clicked

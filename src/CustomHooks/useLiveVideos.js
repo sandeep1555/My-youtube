@@ -20,7 +20,7 @@ const useLivevideos = () => {
       {const dataId=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+liveVideosId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics");
        const jsonId=await dataId.json();
        dispatch(getLivevideo(jsonId.items))
-       console.log(jsonId.items)
+
 
     }
        else{

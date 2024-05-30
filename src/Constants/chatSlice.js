@@ -8,7 +8,7 @@ const chatSlice=createSlice({
     reducers:{
         addLivechat:(state,action)=>
         {
-            state.Livechat.splice(10,1);
+            state.Livechat.splice(15,1);
             state.Livechat.unshift(action.payload);
         }
     }

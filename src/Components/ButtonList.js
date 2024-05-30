@@ -26,7 +26,7 @@ const handleButtonClick = async(buttonName) => {
  if(liveVideosId)
  {const dataId=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+liveVideosId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics");
   const jsonId=await dataId.json();
-   console.log(jsonId);
+
    
   const channelIds=jsonId.items.map((video)=>video.snippet.channelId);
   const channelDetailsProm=channelIds.map(async channelId=>
@@ -42,7 +42,7 @@ const json=await data.json();
          videoInfo:video,
          channelInfo:channelDetails[index],
     }));
-    console.log(videosWithChannelDetails);
+
   buttonName==="Live" && dispatch(getLivevideo(videosWithChannelDetails))
   buttonName==="Music" && dispatch(getMusicvideo(videosWithChannelDetails))
   buttonName==="News" && dispatch(getNewsvideo(videosWithChannelDetails))

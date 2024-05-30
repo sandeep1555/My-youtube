@@ -4,6 +4,13 @@ import { useSelector } from 'react-redux';
 const Comments = ({data}) => {
 
 const {name,text}=data;
+const handlecommentEnter=(e)=>
+  {
+  if(e.key==="Enter")
+  {
+    <Comments/>
+  }
+}
 
   return (
     <div className='flex items-center'>
@@ -14,7 +21,7 @@ const {name,text}=data;
 
         <div>
 
-      {<input type={text}  placeholder='write your comment'  />}
+      {<input type={text}  placeholder='write your comment' onKeyDown={handlecommentEnter}  />}
         </div>
 
     </div>

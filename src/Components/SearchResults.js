@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { YOUTUBE_API_KEY } from '../Constants/useConstant';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSearchvideo } from '../Constants/VideosSlice';
+import { getSearchvideo, getWatchPagevideo } from '../Constants/VideosSlice';
 import SearchList from './SearchList';
 import ButtonList from './ButtonList';
 
 const SearchResults = () => {
   const [searchparams] =useSearchParams();
   const suggestiontext=searchparams.get("search_query");
-
+  const watchPagevideo=useSelector(store=>store.videos.watchpagevideo);
   const dispatch=useDispatch();
   const searchvideo=useSelector(store=>store.videos.searchvideo);
   
@@ -44,6 +44,8 @@ const suggestionvideos=async()=>
     suggestionvideos();
   },[])
 
+ 
+
 
 
 
@@ -58,10 +60,10 @@ const suggestionvideos=async()=>
       <p className='ml-[38px] mt-4 text-gray-600'>Showing results for <span  className='font-bold'>{suggestiontext}</span> </p>
      { searchvideo && searchvideo.map((video)=>
       (
-        <div className='mx-4 my-4'>
+        <div className='my-4' >
 
        
-        <Link  key={video.videoInfo.id} to={video.videoInfo.id.videoId ? ("/watch?v="+video.videoInfo.id.videoId):("/watch?v="+video.videoInfo.id)}><SearchList  videoinfo={video.videoInfo} channelinfo={video.channelInfo} /></Link>
+        <Link  key={video.videoInfo.id} to={video.videoInfo.id.videoId ? ("/watch?v="+video.videoInfo.id.videoId):("/watch?v="+video.videoInfo.id)}><SearchList  videoinfo={video.videoInfo} channelinfo={video.channelInfo}  /></Link>
         </div>
       ))}
      

@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { adduser } from "../Constants/userSilce";
 import { auth } from "../Constants/firebase";
 import { useNavigate } from "react-router-dom";
+import CopyButton from "./CopyButton";
 const LogIn = () => {
   const email = useRef(null);
   const password = useRef(null);
@@ -19,10 +20,11 @@ const LogIn = () => {
   const [Errormessage, setErrorMessage] = useState(null);
   const [signInButton,setSignInButton]=useState("Sign In");
   const [signUpButton,setSignUpButton]=useState("Sign Up");
+  const [showCredentials,setshowCredentails]=useState(false);
 
   const dispatch = useDispatch();
   const handleSignInbutton = () => {
-    console.log("clicked");
+
     const message = CheckValidation(
       email.current.value,
       password.current.value
@@ -50,7 +52,7 @@ const LogIn = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage("user not found,please sign up");
-          setSignInButton("SIgn In")
+          setSignInButton("Sign In")
         });
     } else {
       setSignUpButton(<svg aria-hidden="true" class="w-7 h-6 mx-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,6 +94,10 @@ const LogIn = () => {
     navigate("/")
   }
 
+  const handleCredentails=()=>
+  {
+    setshowCredentails(!showCredentials)
+  }
   return (
  
     <form onSubmit={(e) => e.preventDefault()}>
@@ -155,7 +161,7 @@ const LogIn = () => {
               )}
             </div>
             {Errormessage && (
-              <p className="text-red-600 p-2 flex ">
+              <p className="text-red-600 p-2 flex w-[300px] ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -176,26 +182,34 @@ const LogIn = () => {
             <div
               className={
                 signInform
-                  ? "flex items-center justify-center"
-                  : "flex  items-center "
+                  ? "flex items-center justify-center mt-4 "
+                  : "flex  items-center justify-center "
               }
             >
               <button
-                className="border m-2 p-2 border-black w-[140px] rounded-lg"
+                className={"border m-2 px-3 border-black w-[140px] rounded-lg text-sm "+ (signInform ? "py-3":"py-1")}
                 onClick={() => setsignInform(!signInform)}
               >
-                {signInform ? "create account" : "have account,sign in"}
+                {signInform ? "Create Account" : "Have account,Sign In"}
               </button>
               <button
                 onClick={() => handleSignInbutton()}
-                className="border m-2  mx-6 px-4 py-2 border-black rounded-lg"
+                className={"border m-2  mx-6 px-6  border-black rounded-lg text-sm "+ (signInform ? "py-3":"py-[14px]")}
               >
                 {signInform ? signInButton : signUpButton}
               </button>
               
             </div>
             <div>
-            <h1 className="ml-[-520px] mt-3">continue without SignIn,<span className="cursor-pointer underline" onClick={handleWithoutSignIn}>click here</span></h1>
+            <h1 className="ml-[-520px] mt-3">continue without SignIn,<span className="cursor-pointer underline text-blue-600" onClick={handleWithoutSignIn}>click here</span></h1>
+            {signInform && <div className="my-4">
+        <span >Demo Credentials,<span onClick={handleCredentails} className="hover:underline cursor-pointer text-blue-600 ">{showCredentials ?"hide":"show"}</span></span>
+        {showCredentials && 
+        <div className="my-2">
+          <p>Email:demo123@gmail.com<CopyButton text={"demo123@gmail.com"}/></p>
+          <p>Password:Demo@123<CopyButton text={"Demo@123"}/></p>
+          </div>}
+      </div>}
             </div>
           </div>
 

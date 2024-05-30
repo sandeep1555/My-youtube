@@ -68,8 +68,8 @@ const commentsData=[
 
 
   return (
-    <div>
-        <h1>Comments</h1>
+    <div className='my-4'>
+        <h1 className='text-xl font-bold'>Comments</h1>
         <CommentList data={commentsData}/>
 
 

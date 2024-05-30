@@ -17,28 +17,57 @@ const dispatch=useDispatch();
     const [serachparams]=useSearchParams();
     const videoId=serachparams.get("v");
     const categoryId= watchPagevideo?.snippet?.categoryId;
- 
-    
+    const Islive= watchPagevideo?.videoInfo?.snippet?.liveBroadcastContent;
+    console.log(Islive)
 
 
-const getvideoByid=async()=>
+
+const getvideoByid=async() =>
 {
     const data=await fetch("https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key="+YOUTUBE_API_KEY+"&part=snippet&part=statistics%2CcontentDetails");
 const json=await data.json();
-dispatch(getWatchPagevideo(json.items[0]));
+const videodetails=json.items[0];
+const channelIds=json.items[0]?.snippet?.channelId;
+       const channelDetailsProm=async()=>
+        {
+            const data=await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet&id="+channelIds+"&key="+YOUTUBE_API_KEY)
+     const json=await data.json();
+
+           return json.items[0]
+        };
+        const channelDetails = await channelDetailsProm();
+
+        const  videosWithChannelDetails=
+         {
+              videoInfo:videodetails && videodetails,
+              channelInfo:channelDetails,
+         };
+         dispatch(getWatchPagevideo(videosWithChannelDetails));
+
+
+
 }
 useEffect(()=>
 {
     getvideoByid();
     dispatch(closeSideBar());
-},[]);
+},[videoId]);
 
   return   ( 
-<div className='flex'>
+<div className='flex my-4 px-12 mx-6'>
 
-   {watchPagevideo&& <WatchPageVedioConatiner videoId={videoId}/>} 
-<SideConatiner categoryId={categoryId}  />
+   {watchPagevideo && <WatchPageVedioConatiner videoId={videoId} videoinfo={watchPagevideo.videoInfo} channelinfo={watchPagevideo.channelInfo}/>} 
+   <div className=''>
+      {Islive === 'live' && <div className=''><LiveChatContainer/></div>}
+      <div>
+      <SideConatiner categoryId={categoryId}  />
+      </div>
+      </div>
+
+
 </div>
+
+
 
   
   )

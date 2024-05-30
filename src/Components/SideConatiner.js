@@ -4,27 +4,29 @@ import { Link } from 'react-router-dom'
 import SideList from './SideList'
 import { getSideListvideo } from '../Constants/VideosSlice'
 import { YOUTUBE_API_KEY } from '../Constants/useConstant'
+import LiveChatContainer  from './LiveChatContainer'
 
-const SideConatiner = ({categoryId}) => {
+const SideConatiner = ({categoryId,Islive}) => {
 
 
     const sideListVideo=useSelector(store=>store.videos.sidelistvideo)
     const dispatch=useDispatch();
-
+    console.log(Islive);
+    
+ console.log(sideListVideo)
 
 
     const Categoryvideos=async()=>
     {
       const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&videosCategoryId="+categoryId+"&key="+YOUTUBE_API_KEY);
       const json=await data.json();
-    console.log(categoryId);
   
     const channelIds=json?.items?.map((video)=>video.snippet.channelId);
     const channelDetailsProm=channelIds.map(async channelId=>
      {
          const data=await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id="+channelId+"&key="+YOUTUBE_API_KEY)
   const json=await data.json();
-  console.log(json.items)
+
         return json.items[0]
      });
      const channelDetails = await Promise.all(channelDetailsProm);
@@ -48,8 +50,9 @@ const SideConatiner = ({categoryId}) => {
 
   return (
     <div>
+     
 
-<div className='flex flex-col'>
+<div className='flex flex-col mx-3'>
 
 
  { sideListVideo && sideListVideo.map((video)=>(

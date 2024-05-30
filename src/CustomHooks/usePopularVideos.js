@@ -18,7 +18,7 @@ const usePopularvideos = () => {
         {
             const data=await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet&id="+channelId+"&key="+YOUTUBE_API_KEY)
      const json=await data.json();
-     console.log(json.items)
+
            return json.items[0]
         });
         const channelDetails = await Promise.all(channelDetailsProm);

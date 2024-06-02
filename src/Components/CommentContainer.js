@@ -1,35 +1,37 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import CommentList from './CommentList'
+import Comments from './Comments'
+import AddComment from './AddComment';
 
 const CommentContainer = () => {
-
+   
 
 const commentsData=[
     {
-        name:"sandeep",
+        name:"sandeep1",
         text:"nice video",
         replies:[
             {
-                name:"sandeep",
+                name:"sandeepS1",
                 text:"nice video",
                 replies:[],
             },{
-                name:"sandeep",
+                name:"sandeepS2",
                 text:"nice video",
                 replies:[
                     {
-                        name:"sandeep",
+                        name:"sandeepSS1",
                         text:"nice video",
                         replies:[],
                     },{
-                        name:"sandeep",
+                        name:"sandeepSS2",
                         text:"nice video",
                         replies:[{
-                            name:"sandeep",
+                            name:"sandeepSSS1",
                             text:"nice video",
                             replies:[],
                         },{
-                            name:"sandeep",
+                            name:"sandeepSSS2",
                             text:"nice video",
                             replies:[],
                         },
@@ -37,40 +39,73 @@ const commentsData=[
                     }
                 ],
             },{
-                name:"sandeep",
+                name:"sandeepS3",
                 text:"nice video",
                 replies:[],
             }
         ],
     },
     {
-        name:"sandeep",
+        name:"sandeep2",
         text:"nice video",
         replies:[],
     },
     {
-        name:"sandeep",
+        name:"sandeep3",
         text:"nice video",
         replies:[],
     },
     {
-        name:"sandeep",
+        name:"sandeep4",
         text:"nice video",
         replies:[],
     },
     {
-        name:"sandeep",
+        name:"sandeep5",
         text:"nice video",
         replies:[],
     }
 ]
 
+const [Comments,setComments]=useState([]);
+
+const AddComments=(name,text,parentId=null)=>
+    {
+
+        const newComment = {
+            id: Date.now(),
+            name:name,
+      text:text,
+      parentId,
+      replies: [],
+          };
+        if(parentId===null) 
+            {
+                setComments([newComment,...Comments]);
+            }
+else{
+        
+        setComments(prevComments => 
+            prevComments.map(comment => 
+              comment.id === parentId
+                ? { ...comment, replies: [ ...comment.replies,newComment] }
+                : comment
+            )
+          );
+   
+}
+
+    }
+    console.log(Comments);
 
 
   return (
     <div className='my-4'>
         <h1 className='text-xl font-bold'>Comments</h1>
-        <CommentList data={commentsData}/>
+        <AddComment  addComment={AddComments} />
+        <CommentList data={Comments} addComment={AddComments} />
+        
+
 
 
     </div>

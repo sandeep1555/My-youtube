@@ -1,4 +1,4 @@
-export const YOUTUBE_API_KEY="AIzaSyBoLUPN3WaiS0G36i0LZMt5CnqxMXyYGkA"
+export const YOUTUBE_API_KEY="AIzaSyDKHnrYOGPwwSdeK3NMRSNUKqm7WQTgJe4"
 
 //process.env.REACT_APP_YOUTUBE_API_KEY;
 

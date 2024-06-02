@@ -19,7 +19,7 @@ const handleButtonClick = async(buttonName) => {
 
   const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+buttonName+"&type=video&maxResults=30&key="+YOUTUBE_API_KEY);
    const json=await data.json();
-  const liveVideosId= json.items.map((video)=>video.id.videoId).join(",");
+  const liveVideosId= json.items.map((video)=>video?.id?.videoId).join(",");
 
 
 

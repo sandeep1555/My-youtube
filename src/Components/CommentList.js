@@ -1,27 +1,19 @@
 import React from 'react'
 import Comments from './Comments'
 
-const CommentList = ({data}) => {
+const CommentList = ({data,addComment}) => {
 
       
 
   return (
     <div className=''>
-        {data.map((comment)=>
-        (
-            <>
-            <div>
-           <Comments data={comment} />
-           </div>
-
-           <div className='pl-5 border-l-2 border-black ml-5'>
-              
-         
-            </div>
-            </>
-        ))}
-      
-
+        {data && data.map((comment)=> 
+        <div>
+          <Comments key={comment.id} data={comment} addComment={addComment}  />
+          <div className='pl-5'>
+          </div>
+          </div>
+        )}
     </div>
   )
 }

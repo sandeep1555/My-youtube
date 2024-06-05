@@ -14,7 +14,8 @@ import CopyButton from "./CopyButton";
 const LogIn = () => {
   const email = useRef(null);
   const password = useRef(null);
-  const name = useRef(null);
+  const name = useRef('');
+  const Confirmpassword=useRef('');
   const navigate = useNavigate();
   const [signInform, setsignInform] = useState(true);
   const [Errormessage, setErrorMessage] = useState(null);
@@ -27,7 +28,9 @@ const LogIn = () => {
 
     const message = CheckValidation(
       email.current.value,
-      password.current.value
+      password.current.value,
+      Confirmpassword?.current?.value,
+      name?.current?.value,
     );
 
     setErrorMessage(message);
@@ -77,13 +80,14 @@ const LogIn = () => {
               navigate("/");
             })
             .catch((error) => {
+
               setErrorMessage(error.message);
             });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(error + errorMessage);
+          setErrorMessage(errorCode + errorMessage);
           setSignUpButton("Sign Up")
           // ..
         });
@@ -149,9 +153,10 @@ const LogIn = () => {
               />
 
               {!signInform && (
-                <div className="flex flex-col my-6">
+                <div className="flex flex-col mt-6 mb-2">
                   <label> re-enter new password:</label>
                   <input
+                  ref={Confirmpassword}
                     className="p-2   w-[300px] border-2 border-gray-300 rounded-lg"
                     type="password"
                     alt="password"
@@ -161,7 +166,7 @@ const LogIn = () => {
               )}
             </div>
             {Errormessage && (
-              <p className="text-red-600 p-2 flex w-[300px] ">
+              <p className="text-red-600 p-2 py-1 flex w-[300px] ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

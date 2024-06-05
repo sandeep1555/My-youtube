@@ -13,7 +13,7 @@ const SideBar = () => {
     navigate("/");
  }
     return  (
-    <div className='w-2/12 text-center p-2   shadow-lg min-w-[240px] h-screen overflow-y-auto'>
+    <div className='w-2/12 text-center p-2   shadow-lg min-w-[240px] h-screen overflow-y-auto hide-scrollbar'>
         <div className=' '>
         <ul className='p-2 cursor-pointer '>
             <li onClick={handleReload} className='hover:bg-gray-100 py-2 rounded-lg'>Home</li>

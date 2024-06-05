@@ -1,4 +1,4 @@
-export const YOUTUBE_API_KEY="AIzaSyDKHnrYOGPwwSdeK3NMRSNUKqm7WQTgJe4"
+export const YOUTUBE_API_KEY="AIzaSyBoLUPN3WaiS0G36i0LZMt5CnqxMXyYGkA"
 
 //process.env.REACT_APP_YOUTUBE_API_KEY;
 
@@ -62,15 +62,22 @@ return  nameList[Math.floor(Math.random() * nameList.length)];
 
 
 
-    export const CheckValidation=(email,password)=>
+    export const CheckValidation=(email,password,confirmPassword,name)=>
     {
          const IsvalidEmail=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
          const IsvalidPassword=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
     
-    
+          if(name === '') return "Enter your username"
          if(!IsvalidEmail) return "Email ID is not valid"
          if(!IsvalidPassword) return "Password is not valid"
-    
+         if (confirmPassword !== undefined) {
+         
+          if (confirmPassword === '') {
+            return 'Confirm password cannot be empty.';
+          } else if (confirmPassword !== password) {
+            return  'Passwords do not match.';
+          }
+        }
          return null;
     }    
   export   const countToDisplaycount=(viewCount)=>

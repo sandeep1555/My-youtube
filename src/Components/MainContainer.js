@@ -12,7 +12,7 @@ const MainContainer = () => {
   const videos=useSelector(store=>store.videos);
   const activeButton=useSelector(store=>store.config.activeButton);
   return (
-    <div className=' flex flex-col  overflow-y-auto h-screen '>
+    <div className=' flex flex-col  overflow-y-auto h-screen  hide-scrollbar'>
 
 <div className='bg-white  w-full pb-2 '>
 <ButtonList />

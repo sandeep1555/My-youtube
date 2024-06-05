@@ -175,10 +175,10 @@ const Header = () => {
           onMouseLeave={handleAccountMouseLeave}
         >
           <div className="w-[40px] h-[40px]  bg-blue-500 rounded-full flex  justify-center text-white text-3xl p-[2px] ">
-            <span>{user.displayName[0].toUpperCase()}</span>
+            <span>{user.displayName ? user.displayName[0].toUpperCase() : "!" }</span>
           </div>
           {showAccount && (
-            <div className="absolute ml-[-130px]">
+            <div className="absolute ml-[-70px]">
               <button onClick={() => handleSignout()}>
                 {"Hey " + user.displayName}
                 <span className="hover:underline text-blue-500">,Sign Out</span>

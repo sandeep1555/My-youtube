@@ -1,7 +1,7 @@
 import React from 'react'
 import { countToDisplaycount } from '../Constants/useConstant';
 
-import "/Users/sandeepdasari/Desktop/my-youtube/src/App.css"
+
 const VideoCard = ({videoinfo,channelinfo}) => {
 
 

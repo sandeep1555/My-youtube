@@ -1,18 +1,13 @@
 
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import './App.css';
+import 'src/App.css';
 import Body from './Components/Body';
 import Header from './Components/Header';
-import appStore from './Constants/appStore';
-import { RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom';
+import {  createBrowserRouter } from 'react-router-dom';
 import MainContainer from './Components/MainContainer';
 import WatchPage from './Components/WatchPage';
 import SearchResults from './Components/SearchResults';
 import LogIn from './Components/LogIn';
-import { useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { adduser, removeuser } from './Constants/userSilce';
-import { auth } from './Constants/firebase';
+
 
 
 

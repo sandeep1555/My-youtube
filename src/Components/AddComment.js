@@ -1,8 +1,8 @@
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import EmojiPicker from "emoji-picker-react";
-import { FaceFrownIcon, FaceSmileIcon } from "@heroicons/react/24/solid";
+import {  FaceSmileIcon } from "@heroicons/react/24/solid";
 
 const AddComment = ({ addComment ,parentId=null}) => {
   const user = useSelector((store) => store.user);

@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, {useState } from 'react'
 import CommentList from './CommentList'
-import Comments from './Comments'
 import AddComment from './AddComment';
 
 const CommentContainer = () => {

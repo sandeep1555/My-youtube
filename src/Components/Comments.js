@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import AddComment from './AddComment';
 import CommentList from './CommentList';

@@ -1,11 +1,7 @@
 import React, { useRef, useState } from "react";
 import { CheckValidation } from "../Constants/useConstant";
 
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,} from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { adduser } from "../Constants/userSilce";
 import { auth } from "../Constants/firebase";

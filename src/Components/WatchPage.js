@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useSearchParams } from 'react-router-dom'
+import {  useSearchParams } from 'react-router-dom'
 import { closeSideBar } from '../Constants/configSlice';
-import SideList from './SideList';
 import {  YOUTUBE_API_KEY } from '../Constants/useConstant';
-import CommentContainer from './CommentContainer';
 import LiveChatContainer from './LiveChatContainer';
-import { getSideListvideo, getWatchPagevideo } from '../Constants/VideosSlice';
+import { getWatchPagevideo } from '../Constants/VideosSlice';
 import SideConatiner from './SideConatiner';
 import WatchPageVedioConatiner from './WatchPageVedioConatiner';
 

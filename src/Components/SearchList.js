@@ -10,7 +10,7 @@ const SearchList = ({videoinfo,channelinfo}) => {
   const {viewCount}=statistics;
  
   const handleVideoContainerClick = () => {
-    // Scroll to the top of the page when the video container is clicked
+  
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

@@ -2,14 +2,13 @@ import React, { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { YOUTUBE_API_KEY } from '../Constants/useConstant';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSearchvideo, getWatchPagevideo } from '../Constants/VideosSlice';
+import { getSearchvideo} from '../Constants/VideosSlice';
 import SearchList from './SearchList';
 import ButtonList from './ButtonList';
 
 const SearchResults = () => {
   const [searchparams] =useSearchParams();
   const suggestiontext=searchparams.get("search_query");
-  const watchPagevideo=useSelector(store=>store.videos.watchpagevideo);
   const dispatch=useDispatch();
   const searchvideo=useSelector(store=>store.videos.searchvideo);
   

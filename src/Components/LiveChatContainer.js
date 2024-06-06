@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LiveChat from './LiveChat'
 import { useDispatch, useSelector } from 'react-redux'
 import { addLivechat } from '../Constants/chatSlice'

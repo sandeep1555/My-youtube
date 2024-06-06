@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { YOUTUBE_API_KEY, countToDisplaycount } from '../Constants/useConstant';
+import React from 'react'
+import { countToDisplaycount } from '../Constants/useConstant';
 
 import "/Users/sandeepdasari/Desktop/my-youtube/src/App.css"
 const VideoCard = ({videoinfo,channelinfo}) => {

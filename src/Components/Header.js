@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSideBar, getSideBar } from "../Constants/configSlice";
-import { YOUTUBE_API_KEY, YOUTUBE_SEARCH_SUGGEST } from "../Constants/useConstant";
+import {  YOUTUBE_SEARCH_SUGGEST } from "../Constants/useConstant";
 import { getSearchCache } from "../Constants/suggestionSlice";
 import { useNavigate } from "react-router-dom";
 

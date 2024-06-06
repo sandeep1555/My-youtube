@@ -154,7 +154,7 @@ console.log(SuggestionList);
         {SuggestionOpen && SearchText.length >= 0 && (
           <div className="absolute bg-gray-100 opacity-90 my-[43px] w-[470px] border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px]">
             <ul>
-              {SuggestionList.map((List) => (
+              {SuggestionList && SuggestionList.map((List) => (
                 <li
                   onMouseDown={(e) => onClickSuggestion(e)}
                   className="px-3 py-2 hover:bg-gray-300 rounded-lg"

@@ -1,5 +1,4 @@
 
-import './App.css';
 import Body from './Components/Body';
 import Header from './Components/Header';
 import {  createBrowserRouter } from 'react-router-dom';
@@ -7,7 +6,6 @@ import MainContainer from './Components/MainContainer';
 import WatchPage from './Components/WatchPage';
 import SearchResults from './Components/SearchResults';
 import LogIn from './Components/LogIn';
-
 
 
 

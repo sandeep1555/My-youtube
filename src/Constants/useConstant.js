@@ -9,7 +9,7 @@ export const YOUTUBE_video_ID="https://www.googleapis.com/youtube/v3/videos?id=V
 
 export const YOUTUBE_CATEGORIES="https://www.googleapis.com/youtube/v3/search?part=snippet?part=statistics&type=video&videoCategoryId=Your_Category_ID_Here&key="
 
-export const YOUTUBE_SEARCH_SUGGEST="http://suggestqueries.google.com/complete/search?client=chrome&ds=yt&q="
+export const YOUTUBE_SEARCH_SUGGEST="https://suggestqueries.google.com/complete/search?client=chrome&ds=yt&q="
 
 export const YOUTUBE_LIVE_videoS="https://www.googleapis.com/youtube/v3/search?key="+YOUTUBE_API_KEY+"&part=snippet&type=video&q=live&eventType=live";
 

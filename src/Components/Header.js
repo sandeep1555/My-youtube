@@ -13,11 +13,11 @@ import { adduser, removeuser } from "../Constants/userSilce";
 const Header = () => {
 
   const [SearchText, setSearchText] = useState("");
-  const [SuggestionList, setSuggestionList] = useState(null);
+  const [SuggestionList, setSuggestionList] = useState();
   const [SuggestionOpen, setSuggestionOpen] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const user = useSelector((store) => store.user);
-
+console.log(SuggestionList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSideMenuBar = () => {

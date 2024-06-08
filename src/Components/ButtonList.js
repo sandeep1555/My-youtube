@@ -53,8 +53,8 @@ navigate("/")
   return (
   
 
-<div className='flex  flex-col'>
-  <div className='flex px-4 mx-[90px] '>
+<div className='flex  flex-col pt-2 md:pt-0'>
+  <div className='flex md:px-4 md:mx-[90px] ml-[10px]  '>
     {buttonList.map((name)=>
     (
      <Buttons key={name}  buttonname={name} getCategory={handleButtonClick}   />

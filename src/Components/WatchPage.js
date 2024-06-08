@@ -52,7 +52,7 @@ useEffect(()=>
 },[videoId]);
 
   return   ( 
-<div className='flex my-4 px-12 '>
+<div className='flex md:my-4 md:px-12 '>
 
    {watchPagevideo && <WatchPageVedioConatiner videoId={videoId} videoinfo={watchPagevideo.videoInfo} channelinfo={watchPagevideo.channelInfo}/>} 
    <div className=''>

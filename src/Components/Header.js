@@ -9,6 +9,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 
 import { auth } from "../Constants/firebase";
 import { adduser, removeuser } from "../Constants/userSilce";
+import { Bars3Icon } from "@heroicons/react/16/solid";
 
 const Header = () => {
 
@@ -109,25 +110,25 @@ console.log(SuggestionList);
   };
 
   return (
-    <div className=" w-screen m-2 p-2  flex justify-between bg-white">
-      <div className="flex items-center">
-        <img
+    <div className=" w-screen md:m-2 md:p-2  m-1 p-1 flex justify-between   bg-white items-center">
+      <div className="flex items-center ">
+        <Bars3Icon
           onClick={handleSideMenuBar}
-          className="h-10 cursor-pointer"
+          className="h-10 cursor-pointer md:w-[30px] w-[20px] "
           alt="menu icon"
           src="https://w7.pngwing.com/pngs/616/930/png-transparent-hamburger-button-computer-icons-menu-bar-line-thumbnail.png"
         />
         <img
           onClick={logoclick}
-          className="cursor-pointer  h-8 px-4"
+          className="cursor-pointer h-5  md:h-8 md:px-4 md:w-[200px] w-[100px] "
           alt="logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1280px-YouTube_Logo_2017.svg.png"
         />
       </div>
 
-      <div className="  flex w-[500px] mr-[90px]">
+      <div className="flex md:w-[500px] w-[185px] h-7 md:h-auto  md:mr-[90px]">
         <input
-          className="w-10/12 rounded-l-full p-2 border border-gray-400 px-5 "
+          className="w-10/12  rounded-l-full md:p-2 p-1  border border-gray-400 md:px-5 px-2 "
           type="text"
           placeholder="Search "
           value={SearchText}
@@ -135,14 +136,14 @@ console.log(SuggestionList);
           onFocus={() => setSuggestionOpen(true)}
           onBlur={() => setSuggestionOpen(false)}
         />
-        <button className="rounded-r-full  w-2/12 border border-gray-400 p-2 px-6 bg-gray-100">
+        <button className="rounded-r-full   w-2/12  border border-gray-400 md:p-2 p-1  md:px-6 px-4 bg-gray-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            class="md:w-6 md:h-6 w-4 h-4 ml-[-8px] md:ml-0"
           >
             <path
               stroke-linecap="round"
@@ -170,7 +171,7 @@ console.log(SuggestionList);
 
       {user ? (
         <div
-          className="relative mx-14"
+          className="relative md:mx-14"
           onMouseEnter={handleAccountMouseEnter}
           onMouseLeave={handleAccountMouseLeave}
         >
@@ -187,10 +188,10 @@ console.log(SuggestionList);
           )}
         </div>
       ) : (
-        <div className="flex border border-gray-400 hover:bg-blue-100 rounded-full my-2 items-center w-[100px] text-blue-500 mx-4">
+        <div className="flex  border border-gray-400 justify-center hover:bg-blue-100 rounded-full md:my-2 items-center w-[50px] md:w-[100px] text-blue-500 md:mx-4 ">
           <button
             onClick={() => handleSignInbutton()}
-            className="flex p-1 font-bold"
+            className="flex p-1 font-bold text-center text-[7px] md:text-lg items-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +199,7 @@ console.log(SuggestionList);
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="md:w-6 md:h-6 w-3 h-3"
             >
               <path
                 stroke-linecap="round"

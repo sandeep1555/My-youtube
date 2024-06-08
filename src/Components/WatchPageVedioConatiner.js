@@ -13,10 +13,10 @@ const WatchPageVedioConatiner = ({videoinfo,channelinfo,videoId}) => {
 const [Subscribe,setSubscribe]=useState(false);
 
   return (watchPagevideo &&
-    <div className='w-[850px] '>
+    <div className='md:w-[850px] overflow-x-hidden '>
 
 <div className='  '>
-<iframe  className="rounded-lg" width="850" height="500" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe  className="rounded-lg md:w-[850px] md:h-[500px] w-[400px]" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 <div className='my-1'>
 <h1 className=' font-bold text-2xl max-w-[850px] truncate-1-lines '>{snippet.title}</h1>

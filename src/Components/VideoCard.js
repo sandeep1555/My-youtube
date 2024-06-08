@@ -16,12 +16,12 @@ const VideoCard = ({videoinfo,channelinfo}) => {
 
   return (
 
-    <div className='m-2  p-2 cursor-pointer  rounded-lg  w-[300px]'  onClick={handleVideoContainerClick}>
+    <div className='m-2  p-2 cursor-pointer  rounded-lg  w-[400px] md:w-[300px]'  onClick={handleVideoContainerClick}>
         <div >
         <img  alt='img' className="rounded-lg" src={thumbnails.medium.url} />
         </div>
 
-        <div className=' flex  flex-row w-[400px]'>
+        <div className=' flex  flex-row w-[300px]'>
           <div className=' mr-2 mt-2 '  >
            <img  alt='img' className="rounded-full w-[40px] h-[40px] " src={channelinfo.snippet.thumbnails.default.url}/>
           </div>

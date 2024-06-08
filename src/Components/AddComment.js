@@ -1,23 +1,32 @@
 
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EmojiPicker from "emoji-picker-react";
 import {  FaceSmileIcon } from "@heroicons/react/24/solid";
+import { setonFoucs, setshowReply } from "../Constants/configSlice";
 
 const AddComment = ({ addComment ,parentId=null}) => {
   const user = useSelector((store) => store.user);
   const [inputText, setInputaText] = useState('');
-  const [OnFocus, setOnFocus] = useState(false);
+  const OnFocus=useSelector(store=>store.config.onFocus);
   const [OpenEmoji,setOpenEmoji]=useState(false);
   const [selectedemoji,setselectedEmoji]=useState('');
+  const dispatch=useDispatch();
   const handleSendClick = () => {
     const name = user ? user.displayName : "demo";
     addComment(name, inputText,parentId);
     setInputaText("");
     setselectedEmoji("");
-    setOnFocus(false);
+    dispatch(setonFoucs(false));
+
 
   };
+  const handleCancelClick=()=>
+    {
+      dispatch(setshowReply(false));
+      dispatch(setonFoucs(false));
+    }
+
 const onEmojiClick=(event, emojiObject) => {
   setInputaText(prevInput => prevInput + event.emoji);
 };
@@ -47,7 +56,7 @@ const onEmojiClick=(event, emojiObject) => {
           </svg>
         </button>
       )}
-      <div className="mb-4 mx-2 w-full "  onFocus={() => setOnFocus(true)}
+      <div className="mb-4 mx-2 w-full "  onFocus={() => dispatch(setonFoucs(true))}
           >
         <input 
           className={OnFocus ?"border-b-black border-b-2 w-full focus:outline-none":" border-b-gray-200 border-b-2 w-full focus:outline-none"}
@@ -65,7 +74,7 @@ const onEmojiClick=(event, emojiObject) => {
           </div>}
           </div>
           <div>
-            <button className="pt-1 px-2 " onClick={handleSendClick}>
+            <button className="pt-1 px-2 " onClick={handleCancelClick}>
               Cancel
             </button>
             <button className="pt-1 px-2" onClick={handleSendClick}>

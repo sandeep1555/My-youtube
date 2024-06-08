@@ -99,8 +99,8 @@ else{
 
 
   return (
-    <div className='my-4'>
-        <h1 className='text-2xl font-bold bg-neutral-100 rounded-lg my- mb-6'>Comments</h1>
+    <div className='md:my-4 my-2 w-[400px] md:w-[850px]'>
+        <h1 className='md:text-2xl text-xl font-bold bg-neutral-100 rounded-lg  mb-6'>Comments</h1>
         <AddComment  addComment={AddComments} />
         <CommentList data={Comments} addComment={AddComments} />
         

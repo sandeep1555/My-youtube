@@ -51,7 +51,7 @@ const SideConatiner = ({categoryId,Islive}) => {
     <div>
      
 
-<div className='flex flex-col mx-3'>
+<div className='flex flex-col md:mx-3'>
 
 
  { sideListVideo && sideListVideo.map((video)=>(

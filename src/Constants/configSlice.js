@@ -6,6 +6,8 @@ const configSlice=createSlice({
         changeSideBar:true,
         toggleButton:true,
         activeButton:'All',
+        showReply:false,
+        onFocus:false,
     },
     reducers:
     {
@@ -24,9 +26,17 @@ const configSlice=createSlice({
         setactiveButton:(state,action)=>
         {
             state.activeButton=action.payload;
-        }
+        },
+        setshowReply:(state,action)=>
+            {
+                state.showReply=action.payload;
+            },
+            setonFoucs:(state,action)=>
+                {
+                   state.onFocus=action.payload;
+                }
        
     }
 })
-export const {getSideBar,closeSideBar,AddtoggleButton,setactiveButton}=configSlice.actions
+export const {getSideBar,closeSideBar,AddtoggleButton,setactiveButton,setshowReply,setonFoucs}=configSlice.actions
 export  default configSlice.reducer

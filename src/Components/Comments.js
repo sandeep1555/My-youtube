@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AddComment from './AddComment';
 import CommentList from './CommentList';
 import { HandThumbDownIcon, HandThumbUpIcon } from '@heroicons/react/24/solid';
+import { setshowReply } from '../Constants/configSlice';
 
 const Comments = ({data,addComment}) => {
 const user=useSelector(store=>store.user)
 const {name,text}=data;
-const [ShowReply,setShowReply]=useState(false);
+const showReply=useSelector(store=>store.config.showReply);
+const dispatch=useDispatch();
 
 const handleReplybutton=()=>
   {
- setShowReply(!ShowReply)
+ dispatch(setshowReply(!showReply));
   }
   return (
     <div>
@@ -48,13 +50,13 @@ const handleReplybutton=()=>
       <button><HandThumbDownIcon className='w-[20px] h-[20px] text-gray-400 mx-1'/></button>
       <button onClick={handleReplybutton} className='text-sm font-bold px-4'>reply</button>
       </div>
-      {ShowReply && 
+      {showReply && 
       <div className=''>
         <AddComment  addComment={addComment} parentId={data.id} />
         </div>
   }
   {data.replies && data.replies.length > 0 && (
-          <div className={data.parentId? "ml-14":""}>
+          <div className={data.parentId? "ml-10":""}>
         <CommentList data={data.replies} addComment={addComment} />
         </div>
       )}

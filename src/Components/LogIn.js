@@ -103,11 +103,11 @@ const LogIn = () => {
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="flex items-center justify-center h-[100vh] bg-gray-200">
  
-        <div className="p-10  flex  justify-between w-8/12 bg-white rounded-xl">
-          <div className=" h-[100px]">
+        <div className="md:p-10  flex  justify-between w-8/12 bg-white rounded-xl">
+          <div className=" md:h-[100px]">
             <img
               alt="google logo"
-              className="h-[80px] w-[80px] bg-white m-2"
+              className="md:h-[80px] md:w-[80px] h-[40px] w-[40px] bg-white m-2"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
             />
             <h1 className=" font-medium text-2xl m-2">
@@ -116,14 +116,14 @@ const LogIn = () => {
             <h3 className="m-2">to continue to YouTube</h3>
           </div>
 
-          <div className="my-5 mx-10  flex flex-col p-5">
+          <div className="md:my-5 md:mx-10  flex flex-col p-5">
             <div className="flex flex-col my-4">
               {!signInform && (
-                <div className="flex flex-col my-6">
+                <div className="flex flex-col md:my-6">
                   <label>User Name</label>
                   <input
                     ref={name}
-                    className="p-2 w-[300px] border-2 border-gray-300 rounded-lg"
+                    className="p-2 md:w-[300px] w-[100px] border-2 border-gray-300 rounded-lg"
                     type="text"
                     placeholder="Username"
                   />
@@ -132,7 +132,7 @@ const LogIn = () => {
               <label>Email:</label>
               <input
                 ref={email}
-                className="p-2  w-[300px] bg-white border-2 border-gray-300 rounded-lg"
+                className="p-2  md:w-[300px] bg-white border-2 border-gray-300 rounded-lg"
                 type="text"
                 alt="email"
                 placeholder="Email or phone"
@@ -142,7 +142,7 @@ const LogIn = () => {
               <label>New password:</label>
               <input
                 ref={password}
-                className="p-2  w-[300px] border-2 border-gray-300 rounded-lg"
+                className="p-2  md:w-[300px] border-2 border-gray-300 rounded-lg"
                 type="password"
                 alt="password"
                 placeholder={signInform ? "password" : "create new password"}

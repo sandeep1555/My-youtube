@@ -44,17 +44,3 @@ export default usePopularvideos
 
 
 
-
-
-
-// const getpopularvideos= async() =>
-//     {
-//         const data=await fetch(YOUTUBE_API);
-//         const json=await data.json();
-//      console.log(json.items)
-//        dispatch(getPopularvideo(json.items));
-//     }
-//     useEffect(()=>
-//     {
-//         getpopularvideos();
-//     },[]);

@@ -10,9 +10,8 @@ const SideConatiner = ({categoryId,Islive}) => {
 
     const sideListVideo=useSelector(store=>store.videos.sidelistvideo)
     const dispatch=useDispatch();
-    console.log(Islive);
+
     
- console.log(sideListVideo)
 
 
     const Categoryvideos=async()=>

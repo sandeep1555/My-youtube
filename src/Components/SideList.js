@@ -16,7 +16,7 @@ const handleVideoContainerClick = () => {
   return (
 
     <div className='flex ' onClick={handleVideoContainerClick} >
-        <div className='w-[220px] '>
+        <div className='md:w-[220px] w-[160px] '>
         <img  alt="img" className="rounded-xl p-2" src={thumbnails.medium.url} />
         </div>
 

@@ -18,7 +18,7 @@ const Header = () => {
   const [SuggestionOpen, setSuggestionOpen] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const user = useSelector((store) => store.user);
-console.log(SuggestionList);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSideMenuBar = () => {
@@ -108,6 +108,13 @@ console.log(SuggestionList);
   const handleAccountMouseLeave = () => {
     setShowAccount(false);
   };
+  const handleSearchButton=()=>
+    {
+      const suggestiontext = SearchText.split(" ").join("+");
+      dispatch(closeSideBar());
+
+      navigate("/results?search_query=" + suggestiontext);
+    }
 
   return (
     <div className=" w-screen md:m-2 md:p-2  m-1 p-1 flex justify-between   bg-white items-center">
@@ -136,7 +143,7 @@ console.log(SuggestionList);
           onFocus={() => setSuggestionOpen(true)}
           onBlur={() => setSuggestionOpen(false)}
         />
-        <button className="rounded-r-full   w-2/12  border border-gray-400 md:p-2 p-1  md:px-6 px-4 bg-gray-100">
+        <button className="rounded-r-full   w-2/12  border border-gray-400 md:p-2 p-1  md:px-6 px-4 bg-gray-100" onClick={handleSearchButton}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -153,7 +160,7 @@ console.log(SuggestionList);
           </svg>
         </button>
         {SuggestionOpen && SearchText.length >= 0 && (
-          <div className="absolute bg-gray-100 opacity-90 my-[43px] w-[470px] border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px]">
+          <div className="absolute bg-gray-100 opacity-90 my-[43px] w-[470px] border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px] cursor-pointer">
             <ul>
               {SuggestionList && SuggestionList.map((List) => (
                 <li

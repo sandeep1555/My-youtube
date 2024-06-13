@@ -9,19 +9,19 @@ const WatchPageVedioConatiner = ({videoinfo,channelinfo,videoId}) => {
     const [liked,setLiked]=useState(false);
     const [unliked,setUnliked]=useState(false);
     const {viewCount}=statistics
-    console.log(channelinfo)
+
 const [Subscribe,setSubscribe]=useState(false);
 
   return (watchPagevideo &&
-    <div className='md:w-[850px] overflow-x-hidden '>
+    <div className='md:w-[850px] overflow-hidden overflow-y-auto'>
 
 <div className='  '>
-<iframe  className="rounded-lg md:w-[850px] md:h-[500px] w-[400px] h-[200px]" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe  className="rounded-lg md:w-[850px] md:h-[500px] w-[380px] h-[200px]" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 <div className='my-1'>
-<h1 className=' font-bold md:text-2xl md:max-w-[850px] max-w-[400px]  truncate-2-lines text-lg  '>{snippet.title}</h1>
+<h1 className=' font-bold md:text-2xl md:max-w-[850px] max-w-[380px]  truncate-2-lines text-lg  '>{snippet.title}</h1>
 
-<div className='flex items-center  md:my-3 my-2 mx-0  md:max-w-[850px] max-w-[400px] justify-between'>
+<div className='flex items-center  md:my-3 my-2 mx-0  md:max-w-[850px] max-w-[380px] justify-between'>
   <div className='flex'>
     <img className="rounded-full bg-gray-400 md:w-10 md:h-10 w-8 h-8"  src={channelinfo?.snippet?.thumbnails?.default?.url}  alt='channelpic'/>   
     <div className='ml-2 flex  flex-col justify-center mt-[-5px] md:mt-[-10px]'>

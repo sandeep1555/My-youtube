@@ -16,7 +16,7 @@ const dispatch=useDispatch();
     const videoId=serachparams.get("v");
     const categoryId= watchPagevideo?.snippet?.categoryId;
     const Islive= watchPagevideo?.videoInfo?.snippet?.liveBroadcastContent;
-    console.log(Islive)
+
 
 
 

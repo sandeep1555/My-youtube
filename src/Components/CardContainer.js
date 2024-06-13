@@ -10,7 +10,7 @@ const CardContainer = ({video}) => {
 
   return (
    
-    <div className='w-12/12  m-2 flex flex-wrap md:ml-[90px] ml-[50px] ' >
+    <div className='w-12/12  m-2 flex flex-wrap md:ml-[90px] ml-[45px] ' >
         {   video&&  video.map((video)=>
         (
           

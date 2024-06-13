@@ -95,11 +95,11 @@ else{
 }
 
     }
-    console.log(Comments);
+
 
 
   return (
-    <div className='md:my-4 my-2 w-[400px] md:w-[850px]'>
+    <div className='md:my-4 my-2 w-[380px] md:w-[850px]'>
         <h1 className='md:text-2xl text-xl font-bold bg-neutral-100 rounded-lg  mb-6'>Comments</h1>
         <AddComment  addComment={AddComments} />
         <CommentList data={Comments} addComment={AddComments} />

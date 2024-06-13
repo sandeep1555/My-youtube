@@ -30,7 +30,7 @@ const AddComment = ({ addComment ,parentId=null}) => {
 const onEmojiClick=(event, emojiObject) => {
   setInputaText(prevInput => prevInput + event.emoji);
 };
-  console.log(inputText)
+
   return (
     <div>
     <div className="flex ">

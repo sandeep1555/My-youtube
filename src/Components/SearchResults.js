@@ -53,7 +53,7 @@ const suggestionvideos=async()=>
 
     searchvideo && 
     <div className=''>
-      <div className='ml-[-66px] mt-4'>
+      <div className='md:ml-[-66px] ml-0 mt-4'>
       <ButtonList/>
       </div>
       <p className='ml-[38px] mt-4 text-gray-600'>Showing results for <span  className='font-bold'>{suggestiontext}</span> </p>

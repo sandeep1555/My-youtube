@@ -101,10 +101,10 @@ const LogIn = () => {
   return (
  
     <form onSubmit={(e) => e.preventDefault()}>
-      <div className="flex items-center justify-center h-[100vh] bg-gray-200">
+      <div className="flex items-center justify-center h-[100vh] bg-gray-200 ">
  
-        <div className="md:p-10  flex  justify-between w-8/12 bg-white rounded-xl">
-          <div className=" md:h-[100px]">
+        <div className="md:p-10  flex  justify-between md:w-8/12 w-11/12 bg-white rounded-xl">
+          <div className=" md:h-[100px] md:p-0 py-10">
             <img
               alt="google logo"
               className="md:h-[80px] md:w-[80px] h-[40px] w-[40px] bg-white m-2"
@@ -117,32 +117,35 @@ const LogIn = () => {
           </div>
 
           <div className="md:my-5 md:mx-10  flex flex-col p-5">
-            <div className="flex flex-col my-4">
+            <div className="flex flex-col mt-2">
               {!signInform && (
-                <div className="flex flex-col md:my-6">
-                  <label>User Name</label>
+                <div className="flex flex-col my-2">
+                  <label>User Name:</label>
                   <input
                     ref={name}
-                    className="p-2 md:w-[300px] w-[100px] border-2 border-gray-300 rounded-lg"
+                    className="p-2 md:w-[300px] w-[250px] border-2 border-gray-300 rounded-lg"
                     type="text"
                     placeholder="Username"
                   />
                 </div>
               )}
+                </div>
+                <div className="flex flex-col my-2">
               <label>Email:</label>
               <input
                 ref={email}
-                className="p-2  md:w-[300px] bg-white border-2 border-gray-300 rounded-lg"
+                className="p-2  md:w-[300px] w-[250px] bg-white border-2 border-gray-300 rounded-lg"
                 type="text"
                 alt="email"
                 placeholder="Email or phone"
               />
-            </div>
+              </div>
+          
             <div className="flex flex-col my-2">
               <label>New password:</label>
               <input
                 ref={password}
-                className="p-2  md:w-[300px] border-2 border-gray-300 rounded-lg"
+                className="p-2  md:w-[300px] w-[250px] border-2 border-gray-300 rounded-lg"
                 type="password"
                 alt="password"
                 placeholder={signInform ? "password" : "create new password"}
@@ -153,7 +156,7 @@ const LogIn = () => {
                   <label> re-enter new password:</label>
                   <input
                   ref={Confirmpassword}
-                    className="p-2   w-[300px] border-2 border-gray-300 rounded-lg"
+                    className="p-2   md:w-[300px] w-[250px] border-2 border-gray-300 rounded-lg"
                     type="password"
                     alt="password"
                     placeholder="re-enter password"
@@ -162,7 +165,7 @@ const LogIn = () => {
               )}
             </div>
             {Errormessage && (
-              <p className="text-red-600 p-2 py-1 flex w-[300px] ">
+              <p className="text-red-600 px-2 py-2 flex w-[300px] ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -183,27 +186,27 @@ const LogIn = () => {
             <div
               className={
                 signInform
-                  ? "flex items-center justify-center mt-4 "
-                  : "flex  items-center justify-center "
+                  ? "flex items-center justify-start mt-4 max-w-[300px] "
+                  : "flex  items-center justify-between max-w-[300px] "
               }
             >
               <button
-                className={"border m-2 px-3 border-black w-[140px] rounded-lg text-sm "+ (signInform ? "py-3":"py-1")}
+                className={"border my-2  px-3 border-black w-[140px] rounded-lg text-sm "+ (signInform ? "py-3":"py-1")}
                 onClick={() => setsignInform(!signInform)}
               >
                 {signInform ? "Create Account" : "Have account,Sign In"}
               </button>
               <button
                 onClick={() => handleSignInbutton()}
-                className={"border m-2  mx-6 px-6  border-black rounded-lg text-sm "+ (signInform ? "py-3":"py-[14px]")}
+                className={"border my-2  mx-6 px-3 w-[80px] md:w-auto  border-black rounded-lg text-sm "+ (signInform ? "py-3":"py-[14px]")}
               >
                 {signInform ? signInButton : signUpButton}
               </button>
               
             </div>
-            <div>
-            <h1 className="ml-[-520px] mt-3">continue without SignIn,<span className="cursor-pointer underline text-blue-600" onClick={handleWithoutSignIn}>click here</span></h1>
-            {signInform && <div className="my-4">
+            <div className=" ">
+            <h1 className="ml-[-490px] mt-3">continue without SignIn,<span className="cursor-pointer underline text-blue-600" onClick={handleWithoutSignIn}>click here</span></h1>
+            {signInform && <div className="my-4 mt-[-25px]">
         <span >Demo Credentials,<span onClick={handleCredentails} className="hover:underline cursor-pointer text-blue-600 ">{showCredentials ?"hide":"show"}</span></span>
         {showCredentials && 
         <div className="my-2">

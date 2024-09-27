@@ -18,7 +18,7 @@ const handleButtonClick = async(buttonName) => {
 
   const data=await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+buttonName+"&type=video&maxResults=30&key="+YOUTUBE_API_KEY);
    const json=await data.json();
-  const liveVideosId= json.items.map((video)=>video?.id?.videoId).join(",");
+  const liveVideosId= json &&  json.items.map((video)=>video?.id?.videoId).join(",");
 
 
 
@@ -55,7 +55,7 @@ navigate("/")
 
 <div className='flex  flex-col pt-2 md:pt-0'>
   <div className='flex md:px-4 md:mx-[90px] ml-[10px]  '>
-    {buttonList.map((name)=>
+    {buttonList && buttonList.map((name)=>
     (
      <Buttons key={name}  buttonname={name} getCategory={handleButtonClick}   />
     ))}

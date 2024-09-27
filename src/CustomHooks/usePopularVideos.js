@@ -14,14 +14,14 @@ const usePopularvideos = () => {
 
 
        const channelIds=json?.items?.map((video)=>video.snippet.channelId);
-       const channelDetailsProm=channelIds.map(async channelId=>
+       const channelDetailsProm= channelIds && channelIds.map(async channelId=>
         {
             const data=await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet&id="+channelId+"&key="+YOUTUBE_API_KEY)
      const json=await data.json();
 
            return json.items[0]
         });
-        const channelDetails = await Promise.all(channelDetailsProm);
+        const channelDetails = channelDetailsProm &&  await Promise.all(channelDetailsProm);
 
          const videosWithChannelDetails= json?.items?.map((video,index)=>(
          {

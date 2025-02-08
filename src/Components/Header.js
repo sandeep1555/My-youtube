@@ -63,9 +63,15 @@ const Header = () => {
   const GetYoutubeSuggestion = async () => {
     const data = await fetch(YOUTUBE_SEARCH_SUGGEST +SearchText);
 
+<<<<<<< HEAD
     console.log(data)
     const json = await data.json();
     console.log(json)
+=======
+    
+    const json = await data.json();
+
+>>>>>>> saved-work
     setSuggestionList(json.items);
 
     dispatch(
@@ -75,8 +81,11 @@ const Header = () => {
     );
   };
 
+<<<<<<< HEAD
   console.log(SuggestionList && SuggestionList)
 
+=======
+>>>>>>> saved-work
   useEffect(() => {
     const timer = setTimeout(() => {
       if (SearchCache[SearchText]) {
@@ -165,7 +174,11 @@ const Header = () => {
           </svg>
         </button>
         {SuggestionOpen && SearchText.length > 0 && (
+<<<<<<< HEAD
           <div className={`absolute bg-gray-100 opacity-100 my-[43px] w-[500px] ${SuggestionList.length>3 ?  "h-[300px]" : "h-auto" }  overflow-y-scroll border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px] cursor-pointer`}>
+=======
+          <div className={`absolute bg-gray-100 opacity-100 my-[43px] w-[500px] ${(SuggestionList &&SuggestionList.length>3) ?  "h-[300px]" : "h-auto" }  overflow-y-scroll border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px] cursor-pointer`}>
+>>>>>>> saved-work
             <ul>
               {SuggestionList && SuggestionList.map((List) => (
                 <li

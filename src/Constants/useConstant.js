@@ -9,7 +9,7 @@ export const YOUTUBE_video_ID="https://www.googleapis.com/youtube/v3/videos?id=V
 
 export const YOUTUBE_CATEGORIES="https://www.googleapis.com/youtube/v3/search?part=snippet?part=statistics&type=video&videoCategoryId=Your_Category_ID_Here&key="+YOUTUBE_API_KEY
 
-export const YOUTUBE_SEARCH_SUGGEST="https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&location=20.5937,78.9629&locationRadius=500km&maxResults=10\&order=title&q=iphone&relevanceLanguage=en&regionCode=IN&type=video&key="+YOUTUBE_API_KEY+"&q="
+export const YOUTUBE_SEARCH_SUGGEST="https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&location=20.5937,78.9629&locationRadius=500km&maxResults=10\&order=title&q=iphone&relevanceLanguage=en&&relevanceLanguage=en&type=video&key="+YOUTUBE_API_KEY+"&q="
 
 export const YOUTUBE_LIVE_videoS="https://www.googleapis.com/youtube/v3/search?key="+YOUTUBE_API_KEY+"&part=snippet&type=video&q=live&eventType=live";
 

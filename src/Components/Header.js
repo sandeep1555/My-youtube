@@ -61,13 +61,16 @@ const Header = () => {
   }, []);
 
   const GetYoutubeSuggestion = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_SUGGEST + SearchText);
+    const data = await fetch(YOUTUBE_SEARCH_SUGGEST +SearchText);
+
+    
     const json = await data.json();
-    setSuggestionList(json[1]);
+
+    setSuggestionList(json.items);
 
     dispatch(
       getSearchCache({
-        [SearchText]: json[1],
+        [SearchText]: json.items,
       })
     );
   };
@@ -159,16 +162,16 @@ const Header = () => {
             />
           </svg>
         </button>
-        {SuggestionOpen && SearchText.length >= 0 && (
-          <div className="absolute bg-gray-100 opacity-90 my-[43px] w-[470px] border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px] cursor-pointer">
+        {SuggestionOpen && SearchText.length > 0 && (
+          <div className={`absolute bg-gray-100 opacity-100 my-[43px] w-[500px] ${(SuggestionList &&SuggestionList.length>3) ?  "h-[300px]" : "h-auto" }  overflow-y-scroll border-gray-100 border px-2 rounded-xl shadow-lg mt-[52px] cursor-pointer`}>
             <ul>
               {SuggestionList && SuggestionList.map((List) => (
                 <li
                   onMouseDown={(e) => onClickSuggestion(e)}
                   className="px-3 py-2 hover:bg-gray-300 rounded-lg"
-                  key={List}
+                  key={List?.id?.videoId}
                 >
-                  {List}
+                  {List?.snippet?.title}
                 </li>
               ))}
             </ul>
